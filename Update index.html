@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Sombra do Dragão — Campanha & Regras</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-dim: #8a6f30;
+    --gold-light: #e8cc80;
+    --crimson: #8b1a1a;
+    --crimson-bright: #c0392b;
+    --crimson-deep: #5a0000;
+    --black-dragon: #0d0a07;
+    --parchment: #f5e6c8;
+    --parchment-dark: #e8d5a3;
+    --parchment-mid: #efe0b1;
+    --ink: #1a1209;
+    --shadow: rgba(0,0,0,0.7);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--black-dragon);
+    background-image:
+      radial-gradient(ellipse at 20% 10%, rgba(139,26,26,0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 90%, rgba(201,168,76,0.08) 0%, transparent 50%);
+    font-family: 'EB Garamond', Georgia, serif;
+    color: var(--parchment);
+    min-height: 100vh;
+    padding: 2rem 1rem 5rem;
+  }
+
+  .container { max-width: 980px; margin: 0 auto; }
+
+  /* NAV */
+  .nav-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+  .nav-tab {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    padding: 0.5rem 1.4rem;
+    border: 1px solid rgba(201,168,76,0.25);
+    cursor: pointer;
+    transition: all 0.25s;
+    background: transparent;
+  }
+  .nav-tab:hover, .nav-tab.active {
+    color: var(--gold);
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.06);
+  }
+
+  /* SECTIONS */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    padding: 3rem 1rem 2rem;
+    border-bottom: 1px solid var(--gold-dim);
+    margin-bottom: 3rem;
+  }
+  .header::before {
+    content: '⚔';
+    font-size: 2rem;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+    animation: flicker 4s ease-in-out infinite;
+  }
+  @keyframes flicker {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 0.45; }
+    75% { opacity: 0.9; }
+  }
+  .campaign-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+    text-shadow: 0 0 40px rgba(201,168,76,0.4), 0 2px 4px rgba(0,0,0,0.8);
+    margin-bottom: 0.5rem;
+  }
+  .campaign-subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    color: var(--gold-dim);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+  .campaign-date {
+    font-style: italic;
+    color: rgba(245,230,200,0.45);
+    font-size: 0.9rem;
+  }
+
+  /* DIVIDER */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2.5rem 0 1.8rem;
+  }
+  .section-divider::before, .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+  }
+  .section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+
+  /* PERSONAGENS */
+  .personagens-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+  @media (max-width: 640px) { .personagens-grid { grid-template-columns: 1fr; } }
+
+  .personagem-card {
+    background: linear-gradient(160deg, rgba(245,230,200,0.06) 0%, rgba(245,230,200,0.02) 100%);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 2px;
+    padding: 1.8rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .personagem-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+  .personagem-card.bloodraven::before {
+    background: linear-gradient(to right, transparent, var(--crimson-bright), transparent);
+  }
+  .personagem-nome {
+    font-family: 'Cinzel', serif;
+    font-size: 1.25rem;
+    color: var(--gold);
+    margin-bottom: 0.2rem;
+    font-weight: 600;
+  }
+  .personagem-card.bloodraven .personagem-nome { color: #e05555; }
+  .personagem-titulo {
+    font-style: italic;
+    color: rgba(245,230,200,0.5);
+    font-size: 0.85rem;
+    margin-bottom: 1.2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+
+  /* STATS CALCULADOS */
+  .stats-calculados {
+    display: flex;
+    gap: 0.6rem;
+    margin-bottom: 1.2rem;
+    flex-wrap: wrap;
+  }
+  .stat-pill {
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 0.3rem 0.7rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+    color: var(--gold-light);
+    border-radius: 2px;
+  }
+  .personagem-card.bloodraven .stat-pill {
+    background: rgba(192,57,43,0.1);
+    border-color: rgba(192,57,43,0.35);
+    color: #e88;
+  }
+
+  .atributos-titulo {
+    font-family: 'Cinzel', serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 0.8rem;
+  }
+  .atributos-lista { list-style: none; margin-bottom: 1.4rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .atributo-item { display: flex; align-items: center; gap: 0.8rem; }
+  .atributo-nome { font-family: 'Cinzel', serif; font-size: 0.76rem; color: rgba(245,230,200,0.7); width: 72px; flex-shrink: 0; }
+  .atributo-barra {
+    flex: 1;
+    height: 6px;
+    background: rgba(245,230,200,0.08);
+    border-radius: 0;
+    overflow: hidden;
+    border: 1px solid rgba(201,168,76,0.15);
+  }
+  .atributo-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--gold-dim), var(--gold));
+    border-radius: 0;
+  }
+  .personagem-card.bloodraven .atributo-fill {
+    background: linear-gradient(to right, #8b1a1a, #e05555);
+  }
+  .atributo-valor { font-family: 'Cinzel', serif; font-size: 0.85rem; color: var(--gold); width: 16px; text-align: right; }
+  .personagem-card.bloodraven .atributo-valor { color: #e05555; }
+
+  .pericias-titulo {
+    font-family: 'Cinzel', serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 0.7rem;
+  }
+  .pericias-lista { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.2rem; }
+  .pericia-tag {
+    font-family: 'Cinzel', serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    color: var(--parchment-dark);
+    background: rgba(245,230,200,0.07);
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 0.25rem 0.6rem;
+    border-radius: 2px;
+  }
+
+  .equip-titulo {
+    font-family: 'Cinzel', serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 0.7rem;
+  }
+  .equip-lista { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.2rem; }
+  .equip-item { font-size: 0.88rem; color: rgba(245,230,200,0.8); display: flex; justify-content: space-between; }
+  .equip-item span { color: rgba(245,230,200,0.45); font-size: 0.8rem; font-style: italic; }
+
+  .relacoes-titulo {
+    font-family: 'Cinzel', serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 0.7rem;
+  }
+  .relacoes-lista { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
+  .relacao-item { font-size: 0.85rem; }
+  .relacao-tipo { color: var(--gold-dim); font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.1em; margin-right: 0.4rem; }
+  .relacao-nome { color: var(--parchment); }
+  .relacao-desc { color: rgba(245,230,200,0.45); font-style: italic; font-size: 0.8rem; }
+
+  /* CENÁRIO */
+  .narrativa-box {
+    background: linear-gradient(135deg, rgba(245,230,200,0.04) 0%, rgba(245,230,200,0.01) 100%);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-left: 3px solid var(--gold-dim);
+    padding: 2rem 2.2rem;
+    margin-bottom: 2.5rem;
+    font-size: 1rem;
+    line-height: 1.85;
+    color: rgba(245,230,200,0.88);
+  }
+  .narrativa-box p { margin-bottom: 1.1rem; }
+  .narrativa-box p:last-child { margin-bottom: 0; }
+  .narrativa-destaque { color: var(--gold-light); font-style: italic; }
+
+  /* GANCHOS */
+  .ganchos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 3rem; }
+  @media (max-width: 640px) { .ganchos-grid { grid-template-columns: 1fr; } }
+  .gancho-card {
+    background: linear-gradient(160deg, rgba(245,230,200,0.05) 0%, rgba(245,230,200,0.01) 100%);
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 1.4rem 1.6rem;
+    position: relative;
+  }
+  .gancho-num {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.8rem;
+    color: rgba(201,168,76,0.15);
+    position: absolute;
+    top: 0.8rem; right: 1rem;
+    line-height: 1;
+  }
+  .gancho-titulo {
+    font-family: 'Cinzel', serif;
+    font-size: 0.88rem;
+    color: var(--gold);
+    margin-bottom: 0.7rem;
+    letter-spacing: 0.05em;
+  }
+  .gancho-texto { font-size: 0.9rem; color: rgba(245,230,200,0.75); line-height: 1.7; }
+  .gancho-texto strong { color: var(--parchment-dark); font-style: italic; font-weight: normal; }
+
+  /* ========= REGRAS ========= */
+  .regras-intro {
+    text-align: center;
+    font-style: italic;
+    color: rgba(245,230,200,0.55);
+    font-size: 0.95rem;
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .regra-bloco {
+    background: linear-gradient(160deg, rgba(245,230,200,0.05) 0%, rgba(245,230,200,0.01) 100%);
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 1.8rem 2rem;
+    margin-bottom: 1.8rem;
+    position: relative;
+  }
+  .regra-bloco::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+  }
+  .regra-titulo {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+
+  /* ATRIBUTOS REGRAS */
+  .attrs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  @media (max-width: 560px) { .attrs-grid { grid-template-columns: 1fr; } }
+  .attr-card {
+    background: rgba(201,168,76,0.06);
+    border: 1px solid rgba(201,168,76,0.25);
+    padding: 1rem 1.1rem;
+    text-align: center;
+  }
+  .attr-card-nome {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .attr-card-abrev {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.4rem;
+    color: var(--gold-dim);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .attr-card-desc {
+    font-size: 0.82rem;
+    color: rgba(245,230,200,0.6);
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  /* TABELAS */
+  .regra-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.8rem 0;
+    font-size: 0.9rem;
+  }
+  .regra-table th {
+    background: rgba(201,168,76,0.12);
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.65rem 0.9rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(201,168,76,0.3);
+  }
+  .regra-table td {
+    padding: 0.65rem 0.9rem;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+    color: rgba(245,230,200,0.8);
+    vertical-align: top;
+  }
+  .regra-table tr:last-child td { border-bottom: none; }
+  .regra-table td:first-child { color: var(--parchment); }
+  .valiriano { color: #c0392b !important; font-weight: 600; }
+
+  /* MECÂNICA DESTAQUE */
+  .mecanica-destaque {
+    background: rgba(201,168,76,0.07);
+    border-left: 3px solid var(--gold-dim);
+    padding: 1rem 1.3rem;
+    margin: 1rem 0;
+    font-size: 0.92rem;
+    color: rgba(245,230,200,0.82);
+    line-height: 1.7;
+  }
+  .mecanica-destaque strong { color: var(--gold-light); }
+
+  /* CRÍTICOS */
+  .criticos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+  @media (max-width: 480px) { .criticos-grid { grid-template-columns: 1fr; } }
+  .critico-card {
+    padding: 1rem 1.2rem;
+    border: 1px solid;
+    position: relative;
+  }
+  .critico-card.sucesso { border-color: rgba(201,168,76,0.35); background: rgba(201,168,76,0.06); }
+  .critico-card.falha { border-color: rgba(139,26,26,0.4); background: rgba(139,26,26,0.06); }
+  .critico-num {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 2.2rem;
+    position: absolute;
+    top: 0.5rem; right: 0.8rem;
+    opacity: 0.2;
+    line-height: 1;
+  }
+  .sucesso .critico-num { color: var(--gold); }
+  .falha .critico-num { color: var(--crimson-bright); }
+  .critico-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .sucesso .critico-label { color: var(--gold); }
+  .falha .critico-label { color: #e05555; }
+  .critico-desc { font-size: 0.88rem; color: rgba(245,230,200,0.72); line-height: 1.6; }
+
+  /* COMBATE GRID */
+  .combate-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem; }
+  @media (max-width: 480px) { .combate-stats { grid-template-columns: 1fr; } }
+  .combate-stat {
+    background: rgba(245,230,200,0.04);
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 0.9rem 1.1rem;
+    text-align: center;
+  }
+  .combate-stat-nome { font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.2em; color: var(--gold-dim); text-transform: uppercase; margin-bottom: 0.3rem; }
+  .combate-stat-formula { font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gold); }
+  .combate-stat-desc { font-size: 0.78rem; color: rgba(245,230,200,0.45); font-style: italic; margin-top: 0.2rem; }
+
+  /* PERÍCIAS GRID */
+  .pericias-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 0.5rem; }
+  @media (max-width: 600px) { .pericias-grid { grid-template-columns: 1fr; } }
+  .pericias-col {
+    background: rgba(245,230,200,0.03);
+    border: 1px solid rgba(201,168,76,0.18);
+    padding: 1.2rem;
+  }
+  .pericias-col-titulo {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    text-align: center;
+  }
+  .pericia-item { margin-bottom: 0.9rem; }
+  .pericia-item:last-child { margin-bottom: 0; }
+  .pericia-item-nome { font-family: 'Cinzel', serif; font-size: 0.8rem; color: var(--parchment); margin-bottom: 0.15rem; }
+  .pericia-item-desc { font-size: 0.78rem; color: rgba(245,230,200,0.5); font-style: italic; line-height: 1.4; }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(201,168,76,0.2);
+    font-style: italic;
+    font-size: 0.85rem;
+    color: rgba(245,230,200,0.3);
+    letter-spacing: 0.05em;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .personagem-card, .gancho-card, .regra-bloco { animation: fadeUp 0.5s ease forwards; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header class="header">
+    <h1 class="campaign-title">A Sombra do Dragão</h1>
+    <p class="campaign-subtitle">Campanha RPG · Westeros · Antes da Primeira Rebelião Blackfyre</p>
+    <p class="campaign-date">195 d.C. — O reino ainda não sabe o que está por vir</p>
+  </header>
+
+  <!-- NAVEGAÇÃO -->
+  <nav class="nav-tabs">
+    <button class="nav-tab active" onclick="showSection('campanha', this)">A Campanha</button>
+    <button class="nav-tab" onclick="showSection('personagens', this)">Os Personagens</button>
+    <button class="nav-tab" onclick="showSection('regras', this)">Sistema de Regras</button>
+  </nav>
+
+  <!-- ======= SEÇÃO: CAMPANHA ======= -->
+  <div id="campanha" class="section active">
+
+    <div class="section-divider"><span class="section-label">Prólogo — Antes da Tempestade</span></div>
+
+    <div class="narrativa-box">
+      <p>O ano é <span class="narrativa-destaque">195 d.C.</span>, e o Rei Aegon IV — chamado às costas de <span class="narrativa-destaque">O Indigno</span> — ainda respira e mancha o Trono de Ferro com seus caprichos. Seus bastardos proliferaram por gerações como ervas daninhas: dezenas deles, produtos de conquistas e sedução, espalhados por Westeros com sangue de dragão nas veias e nenhuma legitimidade para reivindicá-lo.</p>
+      <p>Entre eles, <span class="narrativa-destaque">Daemon Waters</span> — o mais querido pelo povo, o mais perigoso para a coroa — carrega Fogo Negro e já sussurra que seria um rei melhor que o legítimo Daeron.</p>
+      <p>O rei vai morrer. Todo mundo sabe disso. A questão não é <span class="narrativa-destaque">quando</span>, mas <span class="narrativa-destaque">o que ele fará antes de morrer</span>. E as últimas palavras do Indigno, dizem os mais paranóicos, serão as mais destrutivas de seu reinado.</p>
+    </div>
+
+    <div class="section-divider"><span class="section-label">Ganchos de Aventura</span></div>
+
+    <div class="ganchos-grid">
+      <div class="gancho-card">
+        <div class="gancho-num">I</div>
+        <div class="gancho-titulo">A Última Vontade do Indigno</div>
+        <p class="gancho-texto">Rumores de que Aegon IV pretende <strong>legitimar todos os seus grandes bastardos</strong> antes de morrer chegam aos ouvidos de Bloodraven. Ele precisa de um aliado confiável — alguém de fora das intrigas da corte — para descobrir se o rumor é verdadeiro, e se há como impedir.</p>
+      </div>
+      <div class="gancho-card">
+        <div class="gancho-num">II</div>
+        <div class="gancho-titulo">O Mensageiro Morto</div>
+        <p class="gancho-texto">Um maester é encontrado morto nas ruas de Porto Real com uma carta incompleta endereçada a Daemon Waters. A carta menciona <strong>"o que está guardado em Harrenhal"</strong>. Beron, envolvido por acidente, não consegue sair da trama sem terminar o que o mensageiro começou.</p>
+      </div>
+      <div class="gancho-card">
+        <div class="gancho-num">III</div>
+        <div class="gancho-titulo">Shiera e a Teia</div>
+        <p class="gancho-texto">Shiera Seastar, a amante de Bloodraven, é também cortejada por outros bastardos — incluindo <strong>Aegor Rivers, o Asa de Prata</strong>, seu inimigo jurado. Uma informação que ela possui pode mudar tudo. Mas obtê-la significa navegar numa rivalidade que já custou sangue.</p>
+      </div>
+      <div class="gancho-card">
+        <div class="gancho-num">IV</div>
+        <div class="gancho-titulo">Lealdades do Norte</div>
+        <p class="gancho-texto">Lord Donnor envia a Beron uma ordem inesperada: <strong>descubra para qual lado os Stark devem se preparar para inclinar</strong>. Beron precisa navegar pela corte sem revelar suas intenções — e sem deixar que Bloodraven, seu novo aliado improvável, descubra que ele está avaliando o príncipe legítimo tanto quanto o bastardo.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ======= SEÇÃO: PERSONAGENS ======= -->
+  <div id="personagens" class="section">
+
+    <div class="section-divider"><span class="section-label">Os Jogadores</span></div>
+
+    <div class="personagens-grid">
+
+      <!-- BERON STARK -->
+      <div class="personagem-card">
+        <div class="personagem-nome">Beron Stark</div>
+        <div class="personagem-titulo">Herdeiro de Winterfell · Filho do Bastão de Carvalho</div>
+
+        <div class="stats-calculados">
+          <div class="stat-pill">PV: 11</div>
+          <div class="stat-pill">DEF: 9</div>
+        </div>
+
+        <div class="atributos-titulo">Atributos</div>
+        <ul class="atributos-lista">
+          <li class="atributo-item">
+            <span class="atributo-nome">Vigor</span>
+            <div class="atributo-barra"><div class="atributo-fill" style="width:100%"></div></div>
+            <span class="atributo-valor">5</span>
+          </li>
+          <li class="atributo-item">
+            <span class="atributo-nome">Corte</span>
+            <div class="atributo-barra"><div class="atributo-fill" style="width:80%"></div></div>
+            <span class="atributo-valor">4</span>
+          </li>
+          <li class="atributo-item">
+            <span class="atributo-nome">Astúcia</span>
+            <div class="atributo-barra"><div class="atributo-fill" style="width:40%"></div></div>
+            <span class="atributo-valor">2</span>
+          </li>
+        </ul>
+
+        <div class="pericias-titulo">Perícias</div>
+        <div class="pericias-lista">
+          <span class="pericia-tag">Lâminas</span>
+          <span class="pericia-tag">Resistência</span>
+          <span class="pericia-tag">Atletismo</span>
+          <span class="pericia-tag">Montaria</span>
+          <span class="pericia-tag">Natureza</span>
+        </div>
+
+        <div class="equip-titulo">Equipamento</div>
+        <ul class="equip-lista">
+          <li class="equip-item">Espada Longa <span>5 de dano</span></li>
+          <li class="equip-item">Armadura de Placa <span>−5 redução</span></li>
+        </ul>
+
+        <div class="relacoes-titulo">Relações</div>
+        <ul class="relacoes-lista">
+          <li class="relacao-item"><span class="relacao-tipo">Irmão</span><span class="relacao-nome">Lord Donnor Stark</span> <span class="relacao-desc">— o Senhor atual</span></li>
+          <li class="relacao-item"><span class="relacao-tipo">Pai</span><span class="relacao-nome">Cregan Stark</span> <span class="relacao-desc">— o Bastão de Carvalho</span></li>
+        </ul>
+      </div>
+
+      <!-- BRYNDEN RIVERS -->
+      <div class="personagem-card bloodraven">
+        <div class="personagem-nome">Brynden Rivers</div>
+        <div class="personagem-titulo">Lord Bloodraven · Filho de Aegon IV</div>
+
+        <div class="stats-calculados">
+          <div class="stat-pill">PV: 9</div>
+          <div class="stat-pill">DEF: 12</div>
+        </div>
+
+        <div class="atributos-titulo">Atributos</div>
+        <ul class="atributos-lista">
+          <li class="atributo-item">
+            <span class="atributo-nome">Astúcia</span>
+            <div class="atributo-barra"><div class="atributo-fill" style="width:100%"></div></div>
+            <span class="atributo-valor">5</span>
+          </li>
+          <li class="atributo-item">
+            <span class="atributo-nome">Corte</span>
+            <div class="atributo-barra"><div class="atributo-fill" style="width:80%"></div></div>
+            <span class="atributo-valor">4</span>
+          </li>
+          <li class="atributo-item">
+            <span class="atributo-nome">Vigor</span>
+            <div class="atributo-barra"><div class="atributo-fill" style="width:60%"></div></div>
+            <span class="atributo-valor">3</span>
+          </li>
+        </ul>
+
+        <div class="pericias-titulo">Perícias</div>
+        <div class="pericias-lista">
+          <span class="pericia-tag">Intriga</span>
+          <span class="pericia-tag">Arquearia</span>
+          <span class="pericia-tag">Subtileza</span>
+          <span class="pericia-tag">Investigação</span>
+          <span class="pericia-tag">Mentira</span>
+        </div>
+
+        <div class="equip-titulo">Equipamento</div>
+        <ul class="equip-lista">
+          <li class="equip-item">Espada Longa <span>5 de dano</span></li>
+          <li class="equip-item">Arco Longo <span>3 de dano, alcance</span></li>
+          <li class="equip-item">Armadura de Placa <span>−5 redução</span></li>
+        </ul>
+
+        <div class="relacoes-titulo">Relações</div>
+        <ul class="relacoes-lista">
+          <li class="relacao-item"><span class="relacao-tipo">Mãe</span><span class="relacao-nome">Lady Melissa Blackwood</span></li>
+          <li class="relacao-item"><span class="relacao-tipo">Pai</span><span class="relacao-nome">Rei Aegon IV Targaryen</span></li>
+          <li class="relacao-item"><span class="relacao-tipo">Amante</span><span class="relacao-nome">Shiera Seastar</span></li>
+          <li class="relacao-item"><span class="relacao-tipo">Aliado</span><span class="relacao-nome">Aurion Rivers</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======= SEÇÃO: REGRAS ======= -->
+  <div id="regras" class="section">
+
+    <p class="regras-intro">"O homem que dita a sentença deve puxar a espada." — Sistema V2.0</p>
+
+    <!-- ATRIBUTOS -->
+    <div class="regra-bloco">
+      <div class="regra-titulo">1. Atributos Fundamentais</div>
+      <p style="font-size:0.9rem; color:rgba(245,230,200,0.7); margin-bottom:1.2rem;">Gerados com <strong style="color:var(--gold-light)">1d6 + 1</strong>. Variam de 2 (Comum) a 7 (Lendário).</p>
+      <div class="attrs-grid">
+        <div class="attr-card">
+          <span class="attr-card-abrev">Vig</span>
+          <div class="attr-card-nome">Vigor</div>
+          <div class="attr-card-desc">Poder físico e resistência. Combate corporal, suportar fadiga e intimidação pela força.</div>
+        </div>
+        <div class="attr-card">
+          <span class="attr-card-abrev">Ast</span>
+          <div class="attr-card-nome">Astúcia</div>
+          <div class="attr-card-desc">Reflexos e estratégia. Iniciativa, arquearia, notar emboscadas e táticas de guerra.</div>
+        </div>
+        <div class="attr-card">
+          <span class="attr-card-abrev">Cor</span>
+          <div class="attr-card-nome">Corte</div>
+          <div class="attr-card-desc">Lábia e política. Navegar pela nobreza, mentir, persuadir e manter etiqueta.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MECÂNICA -->
+    <div class="regra-bloco">
+      <div class="regra-titulo">2. Mecânica de Jogo</div>
+      <p style="font-size:0.9rem; color:rgba(245,230,200,0.7); margin-bottom:1rem;">Para qualquer ação com risco, role <strong style="color:var(--gold-light)">1d6 + Atributo</strong> contra a dificuldade.</p>
+      <table class="regra-table">
+        <tr>
+          <th>Dificuldade</th>
+          <th>Alvo</th>
+          <th>Contexto</th>
+        </tr>
+        <tr>
+          <td>Fácil</td>
+          <td style="color:var(--gold-light); font-family:'Cinzel',serif;">8</td>
+          <td>Tarefas sob pressão moderada para profissionais.</td>
+        </tr>
+        <tr>
+          <td>Padrão</td>
+          <td style="color:var(--gold-light); font-family:'Cinzel',serif;">10</td>
+          <td>Onde se decidem os conflitos reais e duelos mortais.</td>
+        </tr>
+        <tr>
+          <td>Difícil</td>
+          <td style="color:var(--gold-light); font-family:'Cinzel',serif;">13</td>
+          <td>Feitos lendários que exigem perícia ou sorte extrema.</td>
+        </tr>
+      </table>
+      <div class="mecanica-destaque">
+        <strong>Vantagem por Perícia:</strong> Se você possuir uma perícia relevante, role <strong>2d6</strong> e use apenas o <strong>maior resultado</strong>. Todo personagem começa com <strong>5 Perícias Iniciais</strong>.
+      </div>
+    </div>
+
+    <!-- CRÍTICOS -->
+    <div class="regra-bloco">
+      <div class="regra-titulo">3. Críticos — O Dado Natural</div>
+      <p style="font-size:0.9rem; color:rgba(245,230,200,0.7); margin-bottom:1rem;">O resultado bruto do dado (sem bônus) define a qualidade da ação.</p>
+      <div class="criticos-grid">
+        <div class="critico-card sucesso">
+          <div class="critico-num">6</div>
+          <div class="critico-label">Sucesso Crítico</div>
+          <div class="critico-desc">Triunfo absoluto. No combate, ignora toda <strong style="color:var(--gold-light)">Armadura</strong>. Na narrativa, obtém um benefício extra além do sucesso.</div>
+        </div>
+        <div class="critico-card falha">
+          <div class="critico-num">1</div>
+          <div class="critico-label">Falha Crítica</div>
+          <div class="critico-desc">Erro desastroso. No combate, fica <strong style="color:#e88">Exposto</strong> — ataques contra você têm vantagem. Na narrativa, a situação piora imediatamente.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMBATE -->
+    <div class="regra-bloco">
+      <div class="regra-titulo">4. Combate e Sobrevivência</div>
+      <p style="font-size:0.9rem; color:rgba(245,230,200,0.7); margin-bottom:1rem;">O combate em Westeros é rápido e perigoso. Poucos golpes podem encerrar uma linhagem.</p>
+
+      <div class="combate-stats">
+        <div class="combate-stat">
+          <div class="combate-stat-nome">Saúde (PV)</div>
+          <div class="combate-stat-formula">Vigor + 6</div>
+          <div class="combate-stat-desc">Capacidade de absorver ferimentos.</div>
+        </div>
+        <div class="combate-stat">
+          <div class="combate-stat-nome">Defesa</div>
+          <div class="combate-stat-formula">Astúcia + 7</div>
+          <div class="combate-stat-desc">Valor que o inimigo precisa atingir para acertar.</div>
+        </div>
+      </div>
+
+      <table class="regra-table" style="margin-bottom:1rem;">
+        <tr><th colspan="3">Arsenal — Dano Causado</th></tr>
+        <tr>
+          <td>Armas Leves</td>
+          <td style="color:var(--gold-light); font-family:'Cinzel',serif;">3</td>
+          <td>Adagas, arcos, bestas, facas.</td>
+        </tr>
+        <tr>
+          <td>Armas Pesadas</td>
+          <td style="color:var(--gold-light); font-family:'Cinzel',serif;">5</td>
+          <td>Espadas longas, machados, lanças.</td>
+        </tr>
+        <tr>
+          <td class="valiriano">Aço Valiriano</td>
+          <td class="valiriano" style="font-family:'Cinzel',serif;">7</td>
+          <td class="valiriano">Ignora armaduras de Couro e Malha.</td>
+        </tr>
+      </table>
+
+      <table class="regra-table">
+        <tr><th colspan="3">Proteções — Redução de Dano</th></tr>
+        <tr>
+          <td>Couro</td>
+          <td style="color:var(--gold-light); font-family:'Cinzel',serif;">−1</td>
+          <td>Batedores e plebeus.</td>
+        </tr>
+        <tr>
+          <td>Cota de Malha</td>
+          <td style="color:var(--gold-light); font-family:'Cinzel',serif;">−3</td>
+          <td>Soldados de linha e mercenários.</td>
+        </tr>
+        <tr>
+          <td>Placa Completa</td>
+          <td style="color:var(--gold-light); font-family:'Cinzel',serif;">−5</td>
+          <td>Cavaleiros e Grandes Lordes.</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- PERÍCIAS -->
+    <div class="regra-bloco">
+      <div class="regra-titulo">5. Perícias — Escolha 5 Iniciais</div>
+      <p style="font-size:0.9rem; color:rgba(245,230,200,0.7); margin-bottom:1.2rem;">Ter uma perícia relevante concede <strong style="color:var(--gold-light)">Vantagem</strong> na ação — role 2d6, pegue o maior.</p>
+      <div class="pericias-grid">
+        <div class="pericias-col">
+          <div class="pericias-col-titulo">Vigor</div>
+          <div class="pericia-item"><div class="pericia-item-nome">Atletismo</div><div class="pericia-item-desc">Correr, escalar e natação extrema.</div></div>
+          <div class="pericia-item"><div class="pericia-item-nome">Briga</div><div class="pericia-item-desc">Combate desarmado, socos e uso do cenário.</div></div>
+          <div class="pericia-item"><div class="pericia-item-nome">Lâminas</div><div class="pericia-item-desc">Manejo de espadas, machados e adagas.</div></div>
+          <div class="pericia-item"><div class="pericia-item-nome">Montaria</div><div class="pericia-item-desc">Controle de cavalos e combate montado.</div></div>
+          <div class="pericia-item"><div class="pericia-item-nome">Resistência</div><div class="pericia-item-desc">Suportar dor, venenos, frio e fadiga.</div></div>
+          <div class="pericia-item"><div class="pericia-item-nome">Armas de Haste</div><div class="pericia-item-desc">Lanças e piques em formação.</div></div>
+        </div>
+        <div class="pericias-col">
+          <div class="pericias-col-titulo">Astúcia</div>
+          <div class="pericia-item"><div class="pericia-item-nome">Guerra</div><div class="pericia-item-desc">Táticas de cerco e comando de campo.</div></div>
+          <div class="pericia-item"><div class="pericia-item-nome">Investigação</div><div class="pericia-item-desc">Detalhes ocultos e intenções reais.</div></div>
+          <div class="pericia-item"><div class="pericia-item-nome">Medicina</div><div class="pericia-item-desc">Feridas de batalha, doenças e ervas.</div></div>
+          <div class="pericia-item"><div class="pericia-item-nome">Natureza</div><div class="pericia-item-desc">Sobrevivência, caça e rastreamento.</div></div>
+          <div class="pericia-item"><div class="pericia-item-nome">Subtileza</div><div class="pericia-item-desc">Furtividade, sombras e mãos leves.</div></div>
+          <div class="pericia-item"><div class="pericia-item-nome">Arquearia</div><div class="pericia-item-desc">Arcos e bestas à distância.</div></div>
+        </div>
+        <div class="pericias-col">
+          <div class="pericias-col-titulo">Corte</div>
+          <div class="pericia-item"><div class="pericia-item-nome">Intriga</div><div class="pericia-item-desc">Segredos, boatos e política de corte.</div></div>
+          <div class="pericia-item"><div class="pericia-item-nome">Mentira</div><div class="pericia-item-desc">Enganação verbal, blefes e disfarces.</div></div>
+          <div class="pericia-item"><div class="pericia-item-nome">Persuasão</div><div class="pericia-item-desc">Diplomacia, carisma e negociação.</div></div>
+          <div class="pericia-item"><div class="pericia-item-nome">Tradição</div><div class="pericia-item-desc">Heráldica, linhagens e história.</div></div>
+          <div class="pericia-item"><div class="pericia-item-nome">Atuação</div><div class="pericia-item-desc">Performance social: música, canto, poesia.</div></div>
+          <div class="pericia-item"><div class="pericia-item-nome">Comércio</div><div class="pericia-item-desc">Avaliação de bens e negociação de preços.</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    A Primeira Rebelião Blackfyre — 196 d.C. · Campanha baseada no universo de George R.R. Martin
+  </footer>
+
+</div>
+
+<script>
+  function showSection(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+</script>
+</body>
+</html>

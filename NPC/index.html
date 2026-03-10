@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Primeira Rebelião Blackfyre — Personagens</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-dim: #8a6f30;
+    --gold-light: #e8cc80;
+    --crimson: #8b1a1a;
+    --crimson-bright: #c0392b;
+    --crimson-deep: #5a0000;
+    --black-dragon: #0d0a07;
+    --parchment: #f5e6c8;
+    --parchment-dark: #e8d5a3;
+    --parchment-mid: #efe0b1;
+    --ink: #1a1209;
+    --shadow: rgba(0,0,0,0.7);
+    --ice-blue: #4a7fa5;
+    --ice-dim: #2e5570;
+    --stark-grey: #7a8b9a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--black-dragon);
+    background-image:
+      radial-gradient(ellipse at 20% 10%, rgba(139,26,26,0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 90%, rgba(201,168,76,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(74,127,165,0.04) 0%, transparent 60%);
+    font-family: 'EB Garamond', Georgia, serif;
+    color: var(--parchment);
+    min-height: 100vh;
+    padding: 2rem 1rem 5rem;
+  }
+
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  /* NAV */
+  .nav-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+  .nav-tab {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    padding: 0.5rem 1.4rem;
+    border: 1px solid rgba(201,168,76,0.25);
+    cursor: pointer;
+    transition: all 0.25s;
+    background: transparent;
+  }
+  .nav-tab:hover, .nav-tab.active {
+    color: var(--gold);
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.06);
+  }
+  .nav-tab.stark-tab { color: var(--stark-grey); border-color: rgba(122,139,154,0.3); }
+  .nav-tab.stark-tab:hover, .nav-tab.stark-tab.active {
+    color: #b0c4d4;
+    border-color: var(--stark-grey);
+    background: rgba(122,139,154,0.06);
+  }
+
+  /* SECTIONS */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    padding: 3rem 1rem 2.5rem;
+    border-bottom: 1px solid var(--gold-dim);
+    margin-bottom: 3rem;
+  }
+  .header::before {
+    content: '🐉';
+    font-size: 2.2rem;
+    display: block;
+    margin-bottom: 1rem;
+    opacity: 0.7;
+    animation: flicker 4s ease-in-out infinite;
+    filter: grayscale(0.3);
+  }
+  @keyframes flicker {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 0.35; }
+    75% { opacity: 0.85; }
+  }
+  .campaign-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.4rem, 3.5vw, 2.4rem);
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+    text-shadow: 0 0 40px rgba(201,168,76,0.4), 0 2px 4px rgba(0,0,0,0.8);
+    margin-bottom: 0.4rem;
+  }
+  .campaign-subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: rgba(201,168,76,0.55);
+    margin-bottom: 0.8rem;
+  }
+  .campaign-year {
+    font-style: italic;
+    color: rgba(245,230,200,0.4);
+    font-size: 0.9rem;
+  }
+
+  /* SECTION DIVIDER */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 2.5rem 0 2rem;
+  }
+  .section-divider::before, .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,168,76,0.35), transparent);
+  }
+  .section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    white-space: nowrap;
+  }
+  .section-label.stark-label { color: var(--stark-grey); }
+
+  /* GRID DE PERSONAGENS */
+  .personagens-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.8rem;
+    margin-bottom: 3rem;
+  }
+  @media (max-width: 720px) { .personagens-grid { grid-template-columns: 1fr; } }
+
+  /* CARD */
+  .personagem-card {
+    background: linear-gradient(160deg, rgba(245,230,200,0.06) 0%, rgba(245,230,200,0.02) 100%);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 2px;
+    padding: 1.8rem;
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp 0.5s ease forwards;
+  }
+  .personagem-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+  /* Variantes de cor por facção */
+  .personagem-card.blackfyre::before {
+    background: linear-gradient(to right, transparent, #c0392b, transparent);
+  }
+  .personagem-card.bloodraven::before {
+    background: linear-gradient(to right, transparent, #8b0000, transparent);
+  }
+  .personagem-card.stark::before {
+    background: linear-gradient(to right, transparent, var(--stark-grey), transparent);
+  }
+  .personagem-card.leal::before {
+    background: linear-gradient(to right, transparent, #c9a84c, transparent);
+  }
+
+  /* AVATAR */
+  .card-topo {
+    display: flex;
+    gap: 1.2rem;
+    margin-bottom: 1.3rem;
+    align-items: flex-start;
+  }
+  .avatar {
+    width: 72px;
+    height: 72px;
+    flex-shrink: 0;
+    border-radius: 2px;
+    overflow: hidden;
+    border: 1px solid rgba(201,168,76,0.3);
+    background: rgba(0,0,0,0.4);
+  }
+  .avatar svg { width: 100%; height: 100%; }
+  .personagem-card.blackfyre .avatar { border-color: rgba(192,57,43,0.5); }
+  .personagem-card.stark .avatar { border-color: rgba(122,139,154,0.5); }
+
+  .card-header-text { flex: 1; }
+  .personagem-nome {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    color: var(--gold);
+    margin-bottom: 0.15rem;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  .personagem-card.blackfyre .personagem-nome { color: #e05555; }
+  .personagem-card.bloodraven .personagem-nome { color: #b03030; }
+  .personagem-card.stark .personagem-nome { color: #b0c4d4; }
+
+  .personagem-titulo {
+    font-style: italic;
+    color: rgba(245,230,200,0.5);
+    font-size: 0.82rem;
+    margin-bottom: 0.6rem;
+  }
+  .faccao-badge {
+    font-family: 'Cinzel', serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    border-radius: 1px;
+    border: 1px solid;
+    display: inline-block;
+  }
+  .faccao-badge.blackfyre { color: #e05555; border-color: rgba(192,57,43,0.4); background: rgba(139,26,26,0.15); }
+  .faccao-badge.leal { color: var(--gold); border-color: rgba(201,168,76,0.35); background: rgba(201,168,76,0.08); }
+  .faccao-badge.stark { color: #b0c4d4; border-color: rgba(122,139,154,0.4); background: rgba(74,100,130,0.1); }
+  .faccao-badge.neutro { color: rgba(245,230,200,0.5); border-color: rgba(245,230,200,0.2); background: rgba(245,230,200,0.04); }
+
+  /* PERSONALIDADE */
+  .personalidade-titulo {
+    font-family: 'Cinzel', serif;
+    font-size: 0.60rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 0.6rem;
+  }
+  .personagem-card.stark .personalidade-titulo { color: var(--stark-grey); }
+  .personagem-card.blackfyre .personalidade-titulo { color: rgba(192,57,43,0.7); }
+  .personalidade-texto {
+    font-size: 0.88rem;
+    color: rgba(245,230,200,0.82);
+    line-height: 1.65;
+    margin-bottom: 1.3rem;
+  }
+
+  /* ATRIBUTOS */
+  .atributos-titulo {
+    font-family: 'Cinzel', serif;
+    font-size: 0.60rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 0.7rem;
+  }
+  .atributos-lista { list-style: none; margin-bottom: 1.3rem; display: flex; flex-direction: column; gap: 0.45rem; }
+  .atributo-item { display: flex; align-items: center; gap: 0.8rem; }
+  .atributo-nome { font-family: 'Cinzel', serif; font-size: 0.72rem; color: rgba(245,230,200,0.65); width: 80px; flex-shrink: 0; }
+  .atributo-barra {
+    flex: 1;
+    height: 5px;
+    background: rgba(245,230,200,0.07);
+    border-radius: 0;
+    overflow: hidden;
+    border: 1px solid rgba(201,168,76,0.12);
+  }
+  .atributo-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--gold-dim), var(--gold));
+  }
+  .personagem-card.blackfyre .atributo-fill { background: linear-gradient(to right, #8b1a1a, #e05555); }
+  .personagem-card.bloodraven .atributo-fill { background: linear-gradient(to right, #5a0000, #b03030); }
+  .personagem-card.stark .atributo-fill { background: linear-gradient(to right, #2e5570, #4a7fa5); }
+  .atributo-valor { font-family: 'Cinzel', serif; font-size: 0.82rem; color: var(--gold); width: 18px; text-align: right; }
+  .personagem-card.blackfyre .atributo-valor { color: #e05555; }
+  .personagem-card.bloodraven .atributo-valor { color: #b03030; }
+  .personagem-card.stark .atributo-valor { color: #7ab0d0; }
+
+  /* EQUIPAMENTOS */
+  .equip-titulo {
+    font-family: 'Cinzel', serif;
+    font-size: 0.60rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 0.6rem;
+  }
+  .equip-lista { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
+  .equip-item {
+    font-size: 0.85rem;
+    color: rgba(245,230,200,0.8);
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(201,168,76,0.07);
+    padding-bottom: 0.3rem;
+  }
+  .equip-item:last-child { border-bottom: none; }
+  .equip-item span { color: rgba(245,230,200,0.4); font-size: 0.77rem; font-style: italic; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* NOTA INTRO */
+  .narrativa-box {
+    background: linear-gradient(135deg, rgba(245,230,200,0.04) 0%, rgba(245,230,200,0.01) 100%);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-left: 3px solid var(--gold-dim);
+    padding: 1.8rem 2rem;
+    margin-bottom: 2.5rem;
+    font-size: 0.96rem;
+    line-height: 1.85;
+    color: rgba(245,230,200,0.85);
+  }
+  .narrativa-box p { margin-bottom: 0.9rem; }
+  .narrativa-box p:last-child { margin-bottom: 0; }
+  .narrativa-destaque { color: var(--gold-light); font-style: italic; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header class="header">
+    <h1 class="campaign-title">A Primeira Rebelião Blackfyre</h1>
+    <p class="campaign-subtitle">Elenco de Personagens — 196 AC</p>
+    <p class="campaign-year">Do reinado de Aegon IV, o Indigno, ao Campo da Grama Vermelha</p>
+  </header>
+
+  <nav class="nav-tabs">
+    <button class="nav-tab active" onclick="showSection('targaryens', this)">Casa Targaryen</button>
+    <button class="nav-tab" onclick="showSection('blackfyres', this)">Casa Blackfyre</button>
+    <button class="nav-tab stark-tab" onclick="showSection('starks', this)">Casa Stark & Lords</button>
+  </nav>
+
+  <!-- ======== TARGARYEN / LEAL ======== -->
+  <div id="targaryens" class="section active">
+    <div class="narrativa-box">
+      <p>O reino sangra por dentro. <span class="narrativa-destaque">Aegon IV, o Indigno</span>, morre deixando um legado de bastardos legitimados, favoritos e rancores alimentados por décadas de caprichos reais. Seu filho legítimo Daeron herda uma coroa envenenada; seu filho bastardo Daemon herda uma espada que vale um trono.</p>
+      <p>Estes são os homens e mulheres que definem uma era — os que sustentam o dragão legítimo e os que erguem o dragão negro.</p>
+    </div>
+
+    <div class="section-divider"><span class="section-label">A Coroa Legítima</span></div>
+
+    <div class="personagens-grid">
+
+      <!-- AEGON IV -->
+      <div class="personagem-card leal">
+        <div class="card-topo">
+          <div class="avatar">
+            <svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+              <rect width="72" height="72" fill="#1a0f05"/>
+              <circle cx="36" cy="24" r="14" fill="#2d1a08"/>
+              <ellipse cx="36" cy="60" rx="22" ry="16" fill="#2d1a08"/>
+              <!-- coroa -->
+              <polygon points="18,18 22,10 27,16 32,8 36,14 40,8 45,16 50,10 54,18" fill="#c9a84c" opacity="0.9"/>
+              <!-- rosto gordo -->
+              <ellipse cx="36" cy="26" rx="12" ry="13" fill="#8b6840"/>
+              <!-- olhos violeta -->
+              <circle cx="30" cy="24" r="2.5" fill="#6a4a9a"/>
+              <circle cx="42" cy="24" r="2.5" fill="#6a4a9a"/>
+              <!-- barba -->
+              <ellipse cx="36" cy="36" rx="9" ry="5" fill="#b8a060" opacity="0.7"/>
+              <!-- cabelo prata -->
+              <path d="M24 20 Q20 14 22 8 Q28 12 28 18" fill="#d4cdb8"/>
+              <path d="M48 20 Q52 14 50 8 Q44 12 44 18" fill="#d4cdb8"/>
+              <!-- dragão no peito -->
+              <text x="28" y="54" font-size="14" fill="#c9a84c" opacity="0.6">🐉</text>
+            </svg>
+          </div>
+          <div class="card-header-text">
+            <div class="personagem-nome">Aegon IV Targaryen</div>
+            <div class="personagem-titulo">"O Indigno" — Rei dos Sete Reinos</div>
+            <span class="faccao-badge neutro">Coroa / Neutro</span>
+          </div>
+        </div>
+        <div class="personalidade-titulo">Personalidade</div>
+        <div class="personalidade-texto">Glutão, lascivo e rancoroso. Aegon é movido por humores e impulsos — distribui favores como punhais e os recolhe com igual prazer. Inteligente o suficiente para saber o que faz; fraco demais para parar. Seu último ato, a legitimação dos bastardos, foi o maior presente que poderia dar aos seus inimigos.</div>
+        <div class="atributos-titulo">Atributos</div>
+        <ul class="atributos-lista">
+          <li class="atributo-item"><span class="atributo-nome">Força</span><div class="atributo-barra"><div class="atributo-fill" style="width:20%"></div></div><span class="atributo-valor">2</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Astúcia</span><div class="atributo-barra"><div class="atributo-fill" style="width:65%"></div></div><span class="atributo-valor">7</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Influência</span><div class="atributo-barra"><div class="atributo-fill" style="width:90%"></div></div><span class="atributo-valor">9</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Combate</span><div class="atributo-barra"><div class="atributo-fill" style="width:15%"></div></div><span class="atributo-valor">1</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Vontade</span><div class="atributo-barra"><div class="atributo-fill" style="width:10%"></div></div><span class="atributo-valor">1</span></li>
+        </ul>
+        <div class="equip-titulo">Itens Notáveis</div>
+        <ul class="equip-lista">
+          <li class="equip-item">Selo Real <span>Autoridade absoluta</span></li>
+          <li class="equip-item">Vestes de cerimônia <span>Seda e ouro, sempre excessivas</span></li>
+          <li class="equip-item">Leito do Trono de Ferro <span>Onde mais dano faz</span></li>
+        </ul>
+      </div>
+
+      <!-- DAERON II -->
+      <div class="personagem-card leal">
+        <div class="card-topo">
+          <div class="avatar">
+            <svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+              <rect width="72" height="72" fill="#0d0f14"/>
+              <ellipse cx="36" cy="60" rx="22" ry="16" fill="#1a2030"/>
+              <ellipse cx="36" cy="26" rx="11" ry="13" fill="#7a6050"/>
+              <circle cx="30" cy="24" r="2.2" fill="#5a3a8a"/>
+              <circle cx="42" cy="24" r="2.2" fill="#5a3a8a"/>
+              <!-- coroa simples -->
+              <rect x="24" y="13" width="24" height="3" fill="#c9a84c" opacity="0.8"/>
+              <rect x="28" y="10" width="3" height="5" fill="#c9a84c" opacity="0.8"/>
+              <rect x="34.5" y="9" width="3" height="6" fill="#c9a84c" opacity="0.8"/>
+              <rect x="41" y="10" width="3" height="5" fill="#c9a84c" opacity="0.8"/>
+              <!-- cabelo prata discreto -->
+              <path d="M25 20 Q24 14 26 11" stroke="#c8c0a8" stroke-width="2" fill="none"/>
+              <path d="M47 20 Q48 14 46 11" stroke="#c8c0a8" stroke-width="2" fill="none"/>
+              <!-- livro no colo -->
+              <rect x="22" y="46" width="28" height="18" rx="1" fill="#3a2a18" opacity="0.8"/>
+              <rect x="23" y="47" width="13" height="16" fill="#4a3522" opacity="0.7"/>
+              <rect x="37" y="47" width="12" height="16" fill="#3d2d1a" opacity="0.7"/>
+              <line x1="36" y1="47" x2="36" y2="63" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+            </svg>
+          </div>
+          <div class="card-header-text">
+            <div class="personagem-nome">Daeron II Targaryen</div>
+            <div class="personagem-titulo">"O Bom" — Príncipe Herdeiro</div>
+            <span class="faccao-badge leal">Leal — Coroa</span>
+          </div>
+        </div>
+        <div class="personalidade-titulo">Personalidade</div>
+        <div class="personalidade-texto">Mais Dornish do que Targaryen, segundo seus críticos. Daeron é inteligente, prudente e genuinamente justo — qualidades que o fazem ser odiado numa corte que prefere força bruta. Diplomata por natureza, guerreiro por necessidade. Carrega o fardo do pai com silêncio e determinação.</div>
+        <div class="atributos-titulo">Atributos</div>
+        <ul class="atributos-lista">
+          <li class="atributo-item"><span class="atributo-nome">Força</span><div class="atributo-barra"><div class="atributo-fill" style="width:35%"></div></div><span class="atributo-valor">4</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Astúcia</span><div class="atributo-barra"><div class="atributo-fill" style="width:80%"></div></div><span class="atributo-valor">8</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Influência</span><div class="atributo-barra"><div class="atributo-fill" style="width:75%"></div></div><span class="atributo-valor">8</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Combate</span><div class="atributo-barra"><div class="atributo-fill" style="width:40%"></div></div><span class="atributo-valor">4</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Vontade</span><div class="atributo-barra"><div class="atributo-fill" style="width:75%"></div></div><span class="atributo-valor">8</span></li>
+        </ul>
+        <div class="equip-titulo">Itens Notáveis</div>
+        <ul class="equip-lista">
+          <li class="equip-item">Armadura de placas dourada <span>Leve, para aparências</span></li>
+          <li class="equip-item">Espada cerimonial <span>Prata com rubi no punho</span></li>
+          <li class="equip-item">Tratados de Dorne <span>Seu maior legado político</span></li>
+        </ul>
+      </div>
+
+      <!-- BAELOR BREAKSPEAR -->
+      <div class="personagem-card leal">
+        <div class="card-topo">
+          <div class="avatar">
+            <svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+              <rect width="72" height="72" fill="#0a0d18"/>
+              <ellipse cx="36" cy="60" rx="22" ry="16" fill="#1a2035"/>
+              <!-- elmo aberto -->
+              <path d="M22 24 Q22 10 36 8 Q50 10 50 24 L50 30 Q50 36 36 36 Q22 36 22 30 Z" fill="#3a4560" opacity="0.9"/>
+              <path d="M24 26 Q24 13 36 11 Q48 13 48 26 L48 30 Q44 34 36 34 Q28 34 24 30 Z" fill="#4a5878"/>
+              <!-- rosto -->
+              <ellipse cx="36" cy="26" rx="10" ry="12" fill="#8a6845"/>
+              <circle cx="30" cy="24" r="2" fill="#5040a0"/>
+              <circle cx="42" cy="24" r="2" fill="#5040a0"/>
+              <!-- cabelo prata atrás do elmo -->
+              <path d="M22 22 Q18 28 20 35" stroke="#c0b890" stroke-width="2.5" fill="none"/>
+              <path d="M50 22 Q54 28 52 35" stroke="#c0b890" stroke-width="2.5" fill="none"/>
+              <!-- escudo no braço -->
+              <ellipse cx="56" cy="52" rx="10" ry="13" fill="#2a3555" stroke="#c9a84c" stroke-width="0.8"/>
+              <path d="M52 42 Q56 40 60 42 L62 52 Q56 60 50 52 Z" fill="#c9a84c" opacity="0.25"/>
+            </svg>
+          </div>
+          <div class="card-header-text">
+            <div class="personagem-nome">Baelor "Breakspear"</div>
+            <div class="personagem-titulo">Príncipe de Dragonstone — O Melhor dos Homens</div>
+            <span class="faccao-badge leal">Leal — Coroa</span>
+          </div>
+        </div>
+        <div class="personalidade-titulo">Personalidade</div>
+        <div class="personalidade-texto">A encarnação do cavaleiro ideal: corajoso, leal, justo e humano. Baelor não é apenas um guerreiro excepcional — é um líder que seus homens seguiriam até o inferno. Sem vaidade, sem crueldade. A tragédia de Westeros é que homens assim sempre morrem cedo demais.</div>
+        <div class="atributos-titulo">Atributos</div>
+        <ul class="atributos-lista">
+          <li class="atributo-item"><span class="atributo-nome">Força</span><div class="atributo-barra"><div class="atributo-fill" style="width:90%"></div></div><span class="atributo-valor">9</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Astúcia</span><div class="atributo-barra"><div class="atributo-fill" style="width:75%"></div></div><span class="atributo-valor">8</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Influência</span><div class="atributo-barra"><div class="atributo-fill" style="width:85%"></div></div><span class="atributo-valor">9</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Combate</span><div class="atributo-barra"><div class="atributo-fill" style="width:95%"></div></div><span class="atributo-valor">10</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Vontade</span><div class="atributo-barra"><div class="atributo-fill" style="width:90%"></div></div><span class="atributo-valor">9</span></li>
+        </ul>
+        <div class="equip-titulo">Itens Notáveis</div>
+        <ul class="equip-lista">
+          <li class="equip-item">Armadura completa de placas azul-aço <span>+2 Defesa</span></li>
+          <li class="equip-item">Lança de guerra de ferro valiriano <span>Dano letal, alcance longo</span></li>
+          <li class="equip-item">Grande escudo com dragão de prata <span>+3 Bloqueio</span></li>
+        </ul>
+      </div>
+
+      <!-- NAERYS -->
+      <div class="personagem-card leal">
+        <div class="card-topo">
+          <div class="avatar">
+            <svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+              <rect width="72" height="72" fill="#0d0a14"/>
+              <ellipse cx="36" cy="60" rx="22" ry="16" fill="#1a1525"/>
+              <!-- véu -->
+              <path d="M18 20 Q20 8 36 6 Q52 8 54 20 L54 45 Q36 50 18 45 Z" fill="#2a2040" opacity="0.7"/>
+              <!-- rosto -->
+              <ellipse cx="36" cy="26" rx="10" ry="12" fill="#9a7860"/>
+              <circle cx="30" cy="24" r="2" fill="#7060b0"/>
+              <circle cx="42" cy="24" r="2" fill="#7060b0"/>
+              <!-- lábios finos -->
+              <path d="M32 32 Q36 34 40 32" stroke="#c06060" stroke-width="1" fill="none"/>
+              <!-- cabelo platinado escorrido -->
+              <path d="M18 20 Q16 35 20 48" stroke="#e0d8c0" stroke-width="3" fill="none" opacity="0.8"/>
+              <path d="M54 20 Q56 35 52 48" stroke="#e0d8c0" stroke-width="3" fill="none" opacity="0.8"/>
+              <!-- estrela de Faith no peito -->
+              <polygon points="36,43 38,48 43,48 39,51 41,56 36,53 31,56 33,51 29,48 34,48" fill="#c9a84c" opacity="0.5" transform="scale(0.7) translate(15,16)"/>
+            </svg>
+          </div>
+          <div class="card-header-text">
+            <div class="personagem-nome">Naerys Targaryen</div>
+            <div class="personagem-titulo">Rainha dos Sete Reinos — Irmã-esposa de Aegon IV</div>
+            <span class="faccao-badge leal">Leal — Coroa</span>
+          </div>
+        </div>
+        <div class="personalidade-titulo">Personalidade</div>
+        <div class="personalidade-texto">Frágil de corpo, inabalável de espírito. Naerys nunca desejou o trono nem o leito do marido — ela queria o septo e seus deuses. Sobreviveu a Aegon com dignidade silenciosa e amor incondicional pelo irmão Aemon. Sua santidade é real; sua sofrida paciência, uma armadura.</div>
+        <div class="atributos-titulo">Atributos</div>
+        <ul class="atributos-lista">
+          <li class="atributo-item"><span class="atributo-nome">Força</span><div class="atributo-barra"><div class="atributo-fill" style="width:5%"></div></div><span class="atributo-valor">1</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Astúcia</span><div class="atributo-barra"><div class="atributo-fill" style="width:70%"></div></div><span class="atributo-valor">7</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Influência</span><div class="atributo-barra"><div class="atributo-fill" style="width:60%"></div></div><span class="atributo-valor">6</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Combate</span><div class="atributo-barra"><div class="atributo-fill" style="width:5%"></div></div><span class="atributo-valor">0</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Vontade</span><div class="atributo-barra"><div class="atributo-fill" style="width:85%"></div></div><span class="atributo-valor">9</span></li>
+        </ul>
+        <div class="equip-titulo">Itens Notáveis</div>
+        <ul class="equip-lista">
+          <li class="equip-item">Colar de estrelas de cristal <span>Símbolo de devoção à Fé</span></li>
+          <li class="equip-item">Livro de preces em valiriano <span>Herdado de Visenya</span></li>
+          <li class="equip-item">Véu de noiva nunca retirado <span>Protesto silencioso</span></li>
+        </ul>
+      </div>
+
+      <!-- AEMON O CAVALEIRO DO DRAGÃO -->
+      <div class="personagem-card leal">
+        <div class="card-topo">
+          <div class="avatar">
+            <svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+              <rect width="72" height="72" fill="#080c10"/>
+              <ellipse cx="36" cy="60" rx="22" ry="16" fill="#10181f"/>
+              <!-- armadura da Guarda Real branca -->
+              <path d="M18 38 Q18 28 36 26 Q54 28 54 38 L54 64 L18 64 Z" fill="#d0c8b0" opacity="0.9"/>
+              <!-- rosto -->
+              <ellipse cx="36" cy="24" rx="11" ry="12" fill="#8a6845"/>
+              <circle cx="30" cy="22" r="2.2" fill="#4a3090"/>
+              <circle cx="42" cy="22" r="2.2" fill="#4a3090"/>
+              <!-- cabelo prata curto -->
+              <path d="M25 18 Q24 10 30 9 Q35 10 35 15" fill="#c8c0a8" opacity="0.9"/>
+              <path d="M47 18 Q48 10 42 9 Q37 10 37 15" fill="#c8c0a8" opacity="0.9"/>
+              <!-- símbolo da Guarda Real no peito -->
+              <polygon points="36,32 38,37 43,37 39,40 41,45 36,42 31,45 33,40 29,37 34,37" fill="#f0f0f0" opacity="0.8" transform="scale(0.65) translate(19.5,14)"/>
+            </svg>
+          </div>
+          <div class="card-header-text">
+            <div class="personagem-nome">Aemon Targaryen</div>
+            <div class="personagem-titulo">"O Cavaleiro do Dragão" — Guarda Real</div>
+            <span class="faccao-badge leal">Leal — Coroa</span>
+          </div>
+        </div>
+        <div class="personalidade-titulo">Personalidade</div>
+        <div class="personalidade-texto">O maior cavaleiro de sua geração, talvez de qualquer geração. Honra sem fissura, lealdade acima do amor — amou Naerys, protegeu Naerys, mas jamais usurpou o que era de seu irmão rei. Essa devoção o consome e o torna imortal. Morreu por salvar o filho de Aegon, mesmo odiando Aegon.</div>
+        <div class="atributos-titulo">Atributos</div>
+        <ul class="atributos-lista">
+          <li class="atributo-item"><span class="atributo-nome">Força</span><div class="atributo-barra"><div class="atributo-fill" style="width:95%"></div></div><span class="atributo-valor">10</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Astúcia</span><div class="atributo-barra"><div class="atributo-fill" style="width:65%"></div></div><span class="atributo-valor">7</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Influência</span><div class="atributo-barra"><div class="atributo-fill" style="width:70%"></div></div><span class="atributo-valor">7</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Combate</span><div class="atributo-barra"><div class="atributo-fill" style="width:100%"></div></div><span class="atributo-valor">10</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Vontade</span><div class="atributo-barra"><div class="atributo-fill" style="width:95%"></div></div><span class="atributo-valor">10</span></li>
+        </ul>
+        <div class="equip-titulo">Itens Notáveis</div>
+        <ul class="equip-lista">
+          <li class="equip-item">Armadura branca da Guarda Real <span>Ferro valiriano laminado</span></li>
+          <li class="equip-item">Longsword sem nome <span>Perfeitamente balanceada</span></li>
+          <li class="equip-item">Elmo com asa de dragão <span>Reconhecido em qualquer campo</span></li>
+        </ul>
+      </div>
+
+
+    </div>
+  </div>
+
+  <!-- ======== BLACKFYRE ======== -->
+  <div id="blackfyres" class="section">
+    <div class="narrativa-box" style="border-left-color: #8b1a1a;">
+      <p>Daemon Waters nasceu de uma princesa e de um rei que preferiu outra coisa ao trono que deixou para o filho legítimo. Recebeu o melhor sangue Targaryen, a melhor espada da dinastia, e o amor de meio reino — e mesmo assim não foi suficiente.</p>
+      <p><span class="narrativa-destaque">A Casa Blackfyre não é vilã. É uma tragédia.</span></p>
+    </div>
+
+    <div class="section-divider"><span class="section-label">O Dragão Negro</span></div>
+
+    <div class="personagens-grid">
+
+      <!-- DAEMON BLACKFYRE -->
+      <div class="personagem-card blackfyre">
+        <div class="card-topo">
+          <div class="avatar">
+            <svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+              <rect width="72" height="72" fill="#0a0004"/>
+              <ellipse cx="36" cy="62" rx="22" ry="14" fill="#180008"/>
+              <!-- armadura negra e vermelha -->
+              <path d="M16 38 Q16 28 36 26 Q56 28 56 38 L56 64 L16 64 Z" fill="#1a0808" opacity="0.95"/>
+              <path d="M16 38 Q16 28 36 26 Q56 28 56 38 L52 64 L20 64 Z" fill="#8b1a1a" opacity="0.25"/>
+              <!-- elmo com asas de dragão -->
+              <path d="M22 24 Q20 14 36 10 Q52 14 50 24 L50 32 Q44 36 36 36 Q28 36 22 32 Z" fill="#1a1a1a" opacity="0.9"/>
+              <!-- asas do elmo -->
+              <path d="M20 20 Q12 16 10 24 Q14 28 20 26" fill="#8b1a1a" opacity="0.8"/>
+              <path d="M52 20 Q60 16 62 24 Q58 28 52 26" fill="#8b1a1a" opacity="0.8"/>
+              <!-- rosto lindo Targaryen -->
+              <ellipse cx="36" cy="26" rx="10" ry="12" fill="#8a6040"/>
+              <circle cx="30" cy="24" r="2.2" fill="#7030c0"/>
+              <circle cx="42" cy="24" r="2.2" fill="#7030c0"/>
+              <!-- cabelo prata-dourado fluindo -->
+              <path d="M26 20 Q22 28 24 40" stroke="#e0d060" stroke-width="2.5" fill="none" opacity="0.9"/>
+              <path d="M46 20 Q50 28 48 40" stroke="#e0d060" stroke-width="2.5" fill="none" opacity="0.9"/>
+              <!-- espada Blackfyre na cintura -->
+              <rect x="48" y="42" width="2.5" height="22" rx="0.5" fill="#c9a84c" opacity="0.9" transform="rotate(15,48,42)"/>
+            </svg>
+          </div>
+          <div class="card-header-text">
+            <div class="personagem-nome">Daemon Blackfyre</div>
+            <div class="personagem-titulo">"O Dragão Negro" — Pretendente ao Trono de Ferro</div>
+            <span class="faccao-badge blackfyre">Casa Blackfyre</span>
+          </div>
+        </div>
+        <div class="personalidade-titulo">Personalidade</div>
+        <div class="personalidade-texto">Quase inumano em sua beleza e carisma. Daemon não busca o poder por ambição fria — ele genuinamente acredita ser o rei que Westeros merece. Guerreiro incomparável, líder nato, amado por senhores e camponeses. Sua tragédia é ser tão perfeito que se torna inevitável: os homens não conseguem deixar de segui-lo.</div>
+        <div class="atributos-titulo">Atributos</div>
+        <ul class="atributos-lista">
+          <li class="atributo-item"><span class="atributo-nome">Força</span><div class="atributo-barra"><div class="atributo-fill" style="width:100%"></div></div><span class="atributo-valor">10</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Astúcia</span><div class="atributo-barra"><div class="atributo-fill" style="width:70%"></div></div><span class="atributo-valor">7</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Influência</span><div class="atributo-barra"><div class="atributo-fill" style="width:95%"></div></div><span class="atributo-valor">10</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Combate</span><div class="atributo-barra"><div class="atributo-fill" style="width:100%"></div></div><span class="atributo-valor">10</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Vontade</span><div class="atributo-barra"><div class="atributo-fill" style="width:85%"></div></div><span class="atributo-valor">9</span></li>
+        </ul>
+        <div class="equip-titulo">Itens Notáveis</div>
+        <ul class="equip-lista">
+          <li class="equip-item">Blackfyre <span>Aço valiriano — espada dos reis</span></li>
+          <li class="equip-item">Armadura negra e vermelha <span>Ferro valiriano, elmo com asas</span></li>
+          <li class="equip-item">Destrier preto "Terremoto" <span>+2 Cavalaria</span></li>
+        </ul>
+      </div>
+
+      <!-- AEGOR RIVERS BITTERSTEEL -->
+      <div class="personagem-card blackfyre">
+        <div class="card-topo">
+          <div class="avatar">
+            <svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+              <rect width="72" height="72" fill="#0a0608"/>
+              <ellipse cx="36" cy="62" rx="22" ry="14" fill="#160c10"/>
+              <path d="M16 40 Q18 30 36 28 Q54 30 56 40 L56 64 L16 64 Z" fill="#1a0a0a" opacity="0.9"/>
+              <!-- armadura escura com cicatrizes visíveis -->
+              <ellipse cx="36" cy="25" rx="12" ry="13" fill="#7a5030"/>
+              <circle cx="29" cy="23" r="2.2" fill="#8b1a1a"/>
+              <circle cx="43" cy="23" r="2.2" fill="#8b1a1a"/>
+              <!-- cicatriz no rosto -->
+              <path d="M32 18 Q35 22 33 28" stroke="#5a2020" stroke-width="1.5" fill="none"/>
+              <!-- cabelo castanho-avermelhado duro -->
+              <path d="M24 20 Q22 12 28 10" stroke="#6a3a20" stroke-width="3" fill="none"/>
+              <path d="M48 20 Q50 12 44 10" stroke="#6a3a20" stroke-width="3" fill="none"/>
+              <!-- espada nas costas -->
+              <rect x="50" y="30" width="2" height="28" fill="#8a7a60" opacity="0.8" transform="rotate(5,50,30)"/>
+              <rect x="46" y="30" width="8" height="2.5" fill="#8a7a60" opacity="0.8"/>
+            </svg>
+          </div>
+          <div class="card-header-text">
+            <div class="personagem-nome">Aegor Rivers</div>
+            <div class="personagem-titulo">"Bittersteel" — Grande Bastardo, General</div>
+            <span class="faccao-badge blackfyre">Casa Blackfyre</span>
+          </div>
+        </div>
+        <div class="personalidade-titulo">Personalidade</div>
+        <div class="personalidade-texto">Raiva pura transformada em competência militar. Aegor nunca perdoou o destino que o fez bastardo quando era tão bom quanto qualquer legítimo. Ódio de Bloodraven, amor obsessivo por Shiera Seastar que ela nunca retribuiu, lealdade feroz a Daemon. Quando Daemon morrer, Bittersteel carregará a chama Blackfyre pelos próximos cinquenta anos.</div>
+        <div class="atributos-titulo">Atributos</div>
+        <ul class="atributos-lista">
+          <li class="atributo-item"><span class="atributo-nome">Força</span><div class="atributo-barra"><div class="atributo-fill" style="width:90%"></div></div><span class="atributo-valor">9</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Astúcia</span><div class="atributo-barra"><div class="atributo-fill" style="width:75%"></div></div><span class="atributo-valor">8</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Influência</span><div class="atributo-barra"><div class="atributo-fill" style="width:65%"></div></div><span class="atributo-valor">7</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Combate</span><div class="atributo-barra"><div class="atributo-fill" style="width:90%"></div></div><span class="atributo-valor">9</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Comando</span><div class="atributo-barra"><div class="atributo-fill" style="width:85%"></div></div><span class="atributo-valor">9</span></li>
+        </ul>
+        <div class="equip-titulo">Itens Notáveis</div>
+        <ul class="equip-lista">
+          <li class="equip-item">Bastarda de aço das Terras dos Rios <span>Duas mãos, dano massivo</span></li>
+          <li class="equip-item">Meia-armadura de placas reforçada <span>Mobilidade + proteção</span></li>
+          <li class="equip-item">Estandarte do dragão negro <span>+2 Moral para forças Blackfyre</span></li>
+        </ul>
+      </div>
+
+      <!-- QUENTYN BALL FIREBALL -->
+      <div class="personagem-card blackfyre">
+        <div class="card-topo">
+          <div class="avatar">
+            <svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+              <rect width="72" height="72" fill="#0a0500"/>
+              <ellipse cx="36" cy="62" rx="22" ry="14" fill="#180900"/>
+              <!-- corpo musculoso, armadura simples -->
+              <path d="M14 40 Q16 28 36 26 Q56 28 58 40 L58 64 L14 64 Z" fill="#2a1800" opacity="0.9"/>
+              <!-- rosto largo, queimado de sol -->
+              <ellipse cx="36" cy="24" rx="13" ry="12" fill="#6a4020"/>
+              <circle cx="29" cy="22" r="2.5" fill="#3a2010"/>
+              <circle cx="43" cy="22" r="2.5" fill="#3a2010"/>
+              <!-- barba avermelhada espessa -->
+              <path d="M23 28 Q28 36 36 37 Q44 36 49 28 Q44 34 36 35 Q28 34 23 28Z" fill="#8a3010" opacity="0.8"/>
+              <!-- cabelo vermelho curto -->
+              <path d="M23 18 Q22 10 30 9 Q34 12 34 17" fill="#a04010" opacity="0.9"/>
+              <path d="M49 18 Q50 10 42 9 Q38 12 38 17" fill="#a04010" opacity="0.9"/>
+              <!-- chama no peito (símbolo) -->
+              <path d="M32 44 Q34 38 36 42 Q38 36 40 44 Q38 46 36 45 Q34 46 32 44Z" fill="#e06010" opacity="0.7"/>
+            </svg>
+          </div>
+          <div class="card-header-text">
+            <div class="personagem-nome">Ser Quentyn Ball</div>
+            <div class="personagem-titulo">"Bola de Fogo" — Mestre-de-armas do Reino</div>
+            <span class="faccao-badge blackfyre">Casa Blackfyre</span>
+          </div>
+        </div>
+        <div class="personalidade-titulo">Personalidade</div>
+        <div class="personalidade-texto">O melhor cavaleiro do reino num campo aberto, talvez o único que rivalizava com Aemon o Cavaleiro do Dragão. Sem refinamento político, sem paciência para intrigas — Fireball acredita que problemas se resolvem com ferro e determinação. Lealdade instintiva a Daemon, desdém pelos convencionalismos de corte.</div>
+        <div class="atributos-titulo">Atributos</div>
+        <ul class="atributos-lista">
+          <li class="atributo-item"><span class="atributo-nome">Força</span><div class="atributo-barra"><div class="atributo-fill" style="width:100%"></div></div><span class="atributo-valor">10</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Astúcia</span><div class="atributo-barra"><div class="atributo-fill" style="width:45%"></div></div><span class="atributo-valor">5</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Influência</span><div class="atributo-barra"><div class="atributo-fill" style="width:55%"></div></div><span class="atributo-valor">6</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Combate</span><div class="atributo-barra"><div class="atributo-fill" style="width:100%"></div></div><span class="atributo-valor">10</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Cavalaria</span><div class="atributo-barra"><div class="atributo-fill" style="width:100%"></div></div><span class="atributo-valor">10</span></li>
+        </ul>
+        <div class="equip-titulo">Itens Notáveis</div>
+        <ul class="equip-lista">
+          <li class="equip-item">Lança de guerra de carvalho ferroso <span>Especialidade em torneiros</span></li>
+          <li class="equip-item">Armadura completa de placas vermelhas <span>+3 Combate montado</span></li>
+          <li class="equip-item">Garanhão ruivo "Braseiro" <span>O mais rápido das Terras dos Rios</span></li>
+        </ul>
+      </div>
+
+      <!-- SHIERA SEASTAR -->
+      <div class="personagem-card blackfyre">
+        <div class="card-topo">
+          <div class="avatar">
+            <svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+              <rect width="72" height="72" fill="#06040e"/>
+              <ellipse cx="36" cy="62" rx="22" ry="14" fill="#100815"/>
+              <!-- vestes de Lys, exóticas -->
+              <path d="M18 42 Q20 34 36 32 Q52 34 54 42 L54 64 L18 64 Z" fill="#2a0a3a" opacity="0.85"/>
+              <!-- rosto perfeitamente simétrico -->
+              <ellipse cx="36" cy="24" rx="11" ry="13" fill="#c09060"/>
+              <!-- um olho azul, um verde -->
+              <circle cx="29.5" cy="22" r="2.5" fill="#1a6ab8"/>
+              <circle cx="30" cy="21.5" r="0.9" fill="#8bc8ff" opacity="0.7"/>
+              <circle cx="42.5" cy="22" r="2.5" fill="#1a8a30"/>
+              <circle cx="43" cy="21.5" r="0.9" fill="#80e090" opacity="0.7"/>
+              <!-- cabelo castanho-escuro com mechas douradas -->
+              <path d="M25 18 Q20 26 22 44" stroke="#4a3018" stroke-width="3.5" fill="none" opacity="0.9"/>
+              <path d="M27 18 Q22 28 24 46" stroke="#c9a030" stroke-width="1.2" fill="none" opacity="0.6"/>
+              <path d="M47 18 Q52 26 50 44" stroke="#4a3018" stroke-width="3.5" fill="none" opacity="0.9"/>
+              <!-- colar de estrela do mar -->
+              <circle cx="36" cy="38" r="1.5" fill="#8a6ac0" opacity="0.9"/>
+              <circle cx="31" cy="39" r="1" fill="#8a6ac0" opacity="0.7"/>
+              <circle cx="41" cy="39" r="1" fill="#8a6ac0" opacity="0.7"/>
+            </svg>
+          </div>
+          <div class="card-header-text">
+            <div class="personagem-nome">Shiera Seastar</div>
+            <div class="personagem-titulo">"A Estrela do Mar" — Grande Bastarda, Feiticeira</div>
+            <span class="faccao-badge neutro">Ambígua</span>
+          </div>
+        </div>
+        <div class="personalidade-titulo">Personalidade</div>
+        <div class="personalidade-texto">A mulher mais bela de Westeros, com olhos de cores diferentes e sangue da antiga nobreza de Lys. Shiera não pertence a nenhum lado — ela pertence a si mesma. Manipula Bloodraven e Bittersteel com igual prazer, pratica artes obscuras com volumes que ninguém mais ousa tocar. Perigosa precisamente por nunca parecer perigosa.</div>
+        <div class="atributos-titulo">Atributos</div>
+        <ul class="atributos-lista">
+          <li class="atributo-item"><span class="atributo-nome">Força</span><div class="atributo-barra"><div class="atributo-fill" style="width:10%"></div></div><span class="atributo-valor">1</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Astúcia</span><div class="atributo-barra"><div class="atributo-fill" style="width:95%"></div></div><span class="atributo-valor">10</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Influência</span><div class="atributo-barra"><div class="atributo-fill" style="width:100%"></div></div><span class="atributo-valor">10</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Magia</span><div class="atributo-barra"><div class="atributo-fill" style="width:85%"></div></div><span class="atributo-valor">9</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Sedução</span><div class="atributo-barra"><div class="atributo-fill" style="width:100%"></div></div><span class="atributo-valor">10</span></li>
+        </ul>
+        <div class="equip-titulo">Itens Notáveis</div>
+        <ul class="equip-lista">
+          <li class="equip-item">Grimório de Lys em valiriano antigo <span>Artes proibidas</span></li>
+          <li class="equip-item">Colar com olho-de-gato encantado <span>Visão além do normal</span></li>
+          <li class="equip-item">Adaga de osso de dragão <span>Veneno aplicado, +5 Envenenamento</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======== STARK & LORDS ======== -->
+  <div id="starks" class="section">
+    <div class="narrativa-box" style="border-left-color: var(--stark-grey);">
+      <p>O Norte se mantém. Enquanto o Sul sangra por pretendentes e bastardos, os Starks observam — com os olhos antigos dos Primeiros Homens — e decidem onde pesa sua espada. <span class="narrativa-destaque">O inverno vem para todos, sejam dragões negros ou dourados.</span></p>
+    </div>
+
+    <div class="section-divider"><span class="section-label stark-label">Casa Stark — Winterfell</span></div>
+
+    <div class="personagens-grid">
+
+      <!-- EDWYLE STARK -->
+      <div class="personagem-card stark">
+        <div class="card-topo">
+          <div class="avatar">
+            <svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+              <rect width="72" height="72" fill="#050810"/>
+              <ellipse cx="36" cy="62" rx="22" ry="14" fill="#0a1018"/>
+              <!-- pelagem do Norte -->
+              <path d="M14 40 Q16 28 36 26 Q56 28 58 40 L58 64 L14 64 Z" fill="#1a2230"/>
+              <path d="M14 40 Q16 28 36 26 Q56 28 58 40" fill="none" stroke="#3a4a5a" stroke-width="3" opacity="0.7"/>
+              <!-- lobo cinza no peito -->
+              <ellipse cx="36" cy="50" rx="10" ry="8" fill="#2a3840" opacity="0.5"/>
+              <!-- rosto nórdico, barbado -->
+              <ellipse cx="36" cy="24" rx="12" ry="13" fill="#7a6050"/>
+              <circle cx="29" cy="22" r="2.2" fill="#3a5060"/>
+              <circle cx="43" cy="22" r="2.2" fill="#3a5060"/>
+              <!-- barba cinza -->
+              <path d="M24 28 Q28 38 36 39 Q44 38 48 28 Q42 35 36 36 Q30 35 24 28Z" fill="#6a7a7a" opacity="0.8"/>
+              <!-- cabelo grisalho -->
+              <path d="M24 20 Q20 12 26 10" stroke="#8a9090" stroke-width="3" fill="none"/>
+              <path d="M48 20 Q52 12 46 10" stroke="#8a9090" stroke-width="3" fill="none"/>
+            </svg>
+          </div>
+          <div class="card-header-text">
+            <div class="personagem-nome">Edwyle Stark</div>
+            <div class="personagem-titulo">Lorde de Winterfell — Senhor do Norte</div>
+            <span class="faccao-badge stark">Casa Stark</span>
+          </div>
+        </div>
+        <div class="personalidade-titulo">Personalidade</div>
+        <div class="personalidade-texto">Austero como o inverno que serve de lema. Edwyle não se ilude com lealdades do Sul — ele sustenta a Coroa por dever aos deuses e aos votos, não por amor a Targaryen. Pragmático, direto, incapaz de dissimulação política. Seus homens o temem e respeitam; seus inimigos, apenas temem.</div>
+        <div class="atributos-titulo">Atributos</div>
+        <ul class="atributos-lista">
+          <li class="atributo-item"><span class="atributo-nome">Força</span><div class="atributo-barra"><div class="atributo-fill" style="width:75%"></div></div><span class="atributo-valor">8</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Astúcia</span><div class="atributo-barra"><div class="atributo-fill" style="width:65%"></div></div><span class="atributo-valor">7</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Influência</span><div class="atributo-barra"><div class="atributo-fill" style="width:80%"></div></div><span class="atributo-valor">8</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Combate</span><div class="atributo-barra"><div class="atributo-fill" style="width:70%"></div></div><span class="atributo-valor">7</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Vontade</span><div class="atributo-barra"><div class="atributo-fill" style="width:90%"></div></div><span class="atributo-valor">9</span></li>
+        </ul>
+        <div class="equip-titulo">Itens Notáveis</div>
+        <ul class="equip-lista">
+          <li class="equip-item">Ice — aço valiriano dos Stark <span>Espada de dois metros, ancestral</span></li>
+          <li class="equip-item">Armadura de malha nórdica forrada <span>Resistência ao frio, +2 Defesa</span></li>
+          <li class="equip-item">Capa de lobo branco <span>Símbolo de senhoridade no Norte</span></li>
+        </ul>
+      </div>
+
+      <!-- CREGAN STARK (se ainda vivo, ancião) -->
+      <div class="personagem-card stark">
+        <div class="card-topo">
+          <div class="avatar">
+            <svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+              <rect width="72" height="72" fill="#030609"/>
+              <ellipse cx="36" cy="62" rx="22" ry="14" fill="#060c12"/>
+              <path d="M16 42 Q18 32 36 30 Q54 32 56 42 L56 64 L16 64 Z" fill="#101820"/>
+              <!-- ancião envolto em pelagem -->
+              <path d="M16 42 Q14 55 20 62" fill="#2a3830" opacity="0.7"/>
+              <path d="M56 42 Q58 55 52 62" fill="#2a3830" opacity="0.7"/>
+              <!-- rosto muito velho, enrugado -->
+              <ellipse cx="36" cy="26" rx="11" ry="12" fill="#6a5040"/>
+              <circle cx="29" cy="23" r="2" fill="#4a6070"/>
+              <circle cx="43" cy="23" r="2" fill="#4a6070"/>
+              <!-- rugas marcadas -->
+              <path d="M25 22 Q27 24 25 26" stroke="#4a3828" stroke-width="0.8" fill="none"/>
+              <path d="M47 22 Q45 24 47 26" stroke="#4a3828" stroke-width="0.8" fill="none"/>
+              <path d="M28 30 Q36 32 44 30" stroke="#4a3828" stroke-width="0.8" fill="none"/>
+              <!-- cabelo e barba completamente brancos -->
+              <path d="M24 20 Q18 14 20 8 Q26 12 26 18" fill="#e0dcd4" opacity="0.9"/>
+              <path d="M48 20 Q54 14 52 8 Q46 12 46 18" fill="#e0dcd4" opacity="0.9"/>
+              <path d="M23 28 Q28 40 36 42 Q44 40 49 28 Q42 37 36 38 Q30 37 23 28Z" fill="#dcd8d0" opacity="0.85"/>
+              <!-- cajado -->
+              <line x1="54" y1="28" x2="62" y2="68" stroke="#6a5030" stroke-width="2.5"/>
+            </svg>
+          </div>
+          <div class="card-header-text">
+            <div class="personagem-nome">Cregan Stark</div>
+            <div class="personagem-titulo">"O Lobo Velho" — Lorde Emérito de Winterfell</div>
+            <span class="faccao-badge stark">Casa Stark</span>
+          </div>
+        </div>
+        <div class="personalidade-titulo">Personalidade</div>
+        <div class="personalidade-texto">Sobreviveu à Dança dos Dragões e à Hora do Lobo. Cregan tem quase noventa anos e ainda comanda respeito absoluto. Sábio além do que as palavras descrevem, severo além da misericórdia comum. Para ele, os Blackfyres são apenas mais um capítulo numa longa história de loucuras do Sul — o Norte sobreviveu a todos eles.</div>
+        <div class="atributos-titulo">Atributos</div>
+        <ul class="atributos-lista">
+          <li class="atributo-item"><span class="atributo-nome">Força</span><div class="atributo-barra"><div class="atributo-fill" style="width:30%"></div></div><span class="atributo-valor">3</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Astúcia</span><div class="atributo-barra"><div class="atributo-fill" style="width:95%"></div></div><span class="atributo-valor">10</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Influência</span><div class="atributo-barra"><div class="atributo-fill" style="width:90%"></div></div><span class="atributo-valor">9</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Combate</span><div class="atributo-barra"><div class="atributo-fill" style="width:25%"></div></div><span class="atributo-valor">3</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Memória</span><div class="atributo-barra"><div class="atributo-fill" style="width:100%"></div></div><span class="atributo-valor">10</span></li>
+        </ul>
+        <div class="equip-titulo">Itens Notáveis</div>
+        <ul class="equip-lista">
+          <li class="equip-item">Ice — espada ancestral <span>Passou a Edwyle, mas ainda consulta</span></li>
+          <li class="equip-item">Anel dos Lordes do Norte <span>Símbolo de autoridade absoluta</span></li>
+          <li class="equip-item">Cajado de carvalho do bosque sagrado <span>+2 Autoridade moral</span></li>
+        </ul>
+      </div>
+
+      <div class="section-divider" style="grid-column: 1/-1; margin: 0.5rem 0 1rem;"><span class="section-label stark-label">Grandes Lordes Aliados</span></div>
+
+      <!-- LORD TYRELL -->
+      <div class="personagem-card leal">
+        <div class="card-topo">
+          <div class="avatar">
+            <svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+              <rect width="72" height="72" fill="#070c04"/>
+              <ellipse cx="36" cy="62" rx="22" ry="14" fill="#0d1a08"/>
+              <path d="M16 40 Q18 28 36 26 Q54 28 56 40 L56 64 L16 64 Z" fill="#1a2a10"/>
+              <!-- folha de rosa bordada no peito -->
+              <circle cx="36" cy="50" r="8" fill="#1e3a14" opacity="0.5"/>
+              <circle cx="36" cy="50" r="4" fill="#c9a84c" opacity="0.3"/>
+              <!-- rosto gorducho e satisfeito -->
+              <ellipse cx="36" cy="24" rx="12" ry="12" fill="#8a7040"/>
+              <circle cx="29" cy="23" r="2.2" fill="#3a5020"/>
+              <circle cx="43" cy="23" r="2.2" fill="#3a5020"/>
+              <!-- sorriso confortável -->
+              <path d="M30 30 Q36 33 42 30" stroke="#c09050" stroke-width="1.2" fill="none"/>
+              <!-- cabelo castanho-esverdeado -->
+              <path d="M24 20 Q20 12 28 10" stroke="#4a5028" stroke-width="3" fill="none"/>
+              <path d="M48 20 Q52 12 44 10" stroke="#4a5028" stroke-width="3" fill="none"/>
+            </svg>
+          </div>
+          <div class="card-header-text">
+            <div class="personagem-nome">Lorde Leo Tyrell</div>
+            <div class="personagem-titulo">"O Preguiçoso" — Senhor de Highgarden</div>
+            <span class="faccao-badge leal">Leal — Coroa</span>
+          </div>
+        </div>
+        <div class="personalidade-titulo">Personalidade</div>
+        <div class="personalidade-texto">Mais inteligente do que aparenta e mais covarde do que admite. Leo Tyrell sustenta Daeron por conveniência — os Tyrells sempre florescem com a Coroa, e a Coroa precisa do Reach. Sua lealdade é real enquanto for lucrativa. Gerencia seu vasto domínio com eficiência relaxada e um olho sempre nos estoques de grãos.</div>
+        <div class="atributos-titulo">Atributos</div>
+        <ul class="atributos-lista">
+          <li class="atributo-item"><span class="atributo-nome">Força</span><div class="atributo-barra"><div class="atributo-fill" style="width:25%"></div></div><span class="atributo-valor">3</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Astúcia</span><div class="atributo-barra"><div class="atributo-fill" style="width:70%"></div></div><span class="atributo-valor">7</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Influência</span><div class="atributo-barra"><div class="atributo-fill" style="width:80%"></div></div><span class="atributo-valor">8</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Recursos</span><div class="atributo-barra"><div class="atributo-fill" style="width:95%"></div></div><span class="atributo-valor">10</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Combate</span><div class="atributo-barra"><div class="atributo-fill" style="width:20%"></div></div><span class="atributo-valor">2</span></li>
+        </ul>
+        <div class="equip-titulo">Itens Notáveis</div>
+        <ul class="equip-lista">
+          <li class="equip-item">Carta de crédito do Iron Bank <span>Financiamento de campanhas</span></li>
+          <li class="equip-item">Espada cerimonial dourada <span>Nunca usada em combate</span></li>
+          <li class="equip-item">Exército do Reach <span>50.000 homens disponíveis</span></li>
+        </ul>
+      </div>
+
+      <!-- LORD LANNISTER -->
+      <div class="personagem-card leal">
+        <div class="card-topo">
+          <div class="avatar">
+            <svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+              <rect width="72" height="72" fill="#0c0a00"/>
+              <ellipse cx="36" cy="62" rx="22" ry="14" fill="#181400"/>
+              <path d="M16 40 Q18 28 36 26 Q54 28 56 40 L56 64 L16 64 Z" fill="#2a2200"/>
+              <!-- armadura dourada Lannister -->
+              <path d="M20 38 Q22 30 36 28 Q50 30 52 38 L52 56 L20 56 Z" fill="#8a7000" opacity="0.6"/>
+              <!-- leão no peito -->
+              <ellipse cx="36" cy="46" rx="9" ry="7" fill="#c9a030" opacity="0.35"/>
+              <!-- rosto altivo e bonito -->
+              <ellipse cx="36" cy="24" rx="11" ry="12" fill="#9a7838"/>
+              <circle cx="29.5" cy="22" r="2.2" fill="#2a6040"/>
+              <circle cx="42.5" cy="22" r="2.2" fill="#2a6040"/>
+              <!-- barba dourada apara -->
+              <path d="M26 28 Q30 35 36 36 Q42 35 46 28 Q41 33 36 34 Q31 33 26 28Z" fill="#c0a030" opacity="0.75"/>
+              <!-- cabelo dourado -->
+              <path d="M24 20 Q20 12 28 9 Q33 11 32 18" fill="#d4a820" opacity="0.9"/>
+              <path d="M48 20 Q52 12 44 9 Q39 11 40 18" fill="#d4a820" opacity="0.9"/>
+            </svg>
+          </div>
+          <div class="card-header-text">
+            <div class="personagem-nome">Lorde Damon Lannister</div>
+            <div class="personagem-titulo">"O Leão" — Senhor de Casterly Rock</div>
+            <span class="faccao-badge leal">Leal — Coroa</span>
+          </div>
+        </div>
+        <div class="personalidade-titulo">Personalidade</div>
+        <div class="personalidade-texto">Orgulhoso como todo Lannister, mas com mais substância que a maioria. Damon sustenta Daeron porque os Lannister nunca apostam no lado que perde — e porque sabe que Daemon Blackfyre, por mais carismático que seja, não vence guerras com carisma. O ouro de Casterly Rock financia lealdade concreta.</div>
+        <div class="atributos-titulo">Atributos</div>
+        <ul class="atributos-lista">
+          <li class="atributo-item"><span class="atributo-nome">Força</span><div class="atributo-barra"><div class="atributo-fill" style="width:65%"></div></div><span class="atributo-valor">7</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Astúcia</span><div class="atributo-barra"><div class="atributo-fill" style="width:80%"></div></div><span class="atributo-valor">8</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Influência</span><div class="atributo-barra"><div class="atributo-fill" style="width:85%"></div></div><span class="atributo-valor">9</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Recursos</span><div class="atributo-barra"><div class="atributo-fill" style="width:100%"></div></div><span class="atributo-valor">10</span></li>
+          <li class="atributo-item"><span class="atributo-nome">Combate</span><div class="atributo-barra"><div class="atributo-fill" style="width:70%"></div></div><span class="atributo-valor">7</span></li>
+        </ul>
+        <div class="equip-titulo">Itens Notáveis</div>
+        <ul class="equip-lista">
+          <li class="equip-item">Widow's Wail (predecessor) <span>Espada longa de aço dourado</span></li>
+          <li class="equip-item">Armadura dourada com leão rampante <span>+2 Intimidação</span></li>
+          <li class="equip-item">Tesouro de Casterly Rock <span>Recurso ilimitado de ouro</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function showSection(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+</script>
+</body>
+</html>

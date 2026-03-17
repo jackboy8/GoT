@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Protocolo Arcano: Magia de Sangue V2.5</title>
+    <style>
+        :root {
+            --blood-dark: #4a0404;
+            --blood-vivid: #bc4749;
+            --gold-accent: #d4af37;
+            --deep-black: #080808;
+            --stone-grey: #2d2d2d;
+        }
+
+        body { 
+            background-color: var(--deep-black); 
+            color: var(--gold-accent); 
+            font-family: "Constantia", "Georgia", serif; 
+            display: flex; 
+            justify-content: center; 
+            padding: 40px 20px; 
+            line-height: 1.6;
+            background-image: radial-gradient(circle, #1a0505 0%, #080808 100%);
+        }
+
+        .grimorio-sangue { 
+            background: rgba(13, 13, 13, 0.95); 
+            width: 100%; 
+            max-width: 950px; 
+            padding: 50px; 
+            border: 2px solid var(--blood-dark); 
+            box-shadow: 0 0 80px rgba(188, 71, 73, 0.3); 
+            position: relative;
+            border-radius: 4px;
+        }
+
+        header { 
+            text-align: center; 
+            border-bottom: 2px solid var(--blood-dark); 
+            margin-bottom: 40px; 
+            padding-bottom: 25px; 
+        }
+
+        h1 { 
+            margin: 0; 
+            color: var(--blood-vivid); 
+            text-transform: uppercase; 
+            font-size: 2.6em; 
+            letter-spacing: 8px; 
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        .intro-text {
+            background: rgba(188, 71, 73, 0.05);
+            border-left: 4px solid var(--blood-vivid);
+            padding: 25px;
+            margin-bottom: 40px;
+            font-style: italic;
+            text-align: justify;
+            color: #ccc;
+        }
+
+        h2 { 
+            color: var(--gold-accent); 
+            border-bottom: 1px solid var(--stone-grey); 
+            margin-top: 40px; 
+            text-transform: uppercase; 
+            font-size: 1.4em; 
+            letter-spacing: 3px; 
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .grid-mecanica { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 25px; 
+            margin: 20px 0; 
+        }
+
+        .card-regra { 
+            background: #111; 
+            border: 1px solid var(--stone-grey); 
+            padding: 20px; 
+            border-top: 3px solid var(--blood-dark); 
+        }
+
+        .card-regra b { color: var(--blood-vivid); text-transform: uppercase; font-size: 0.9em; display: block; margin-bottom: 8px; }
+
+        .formula { 
+            font-family: "Courier New", monospace; 
+            color: #ff4d4d; 
+            font-weight: bold; 
+            background: #000; 
+            padding: 3px 8px; 
+            border-radius: 3px; 
+            border: 1px solid var(--blood-dark); 
+        }
+
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin: 25px 0; 
+            background: #0a0a0a; 
+            font-size: 0.9em;
+        }
+
+        th { background: var(--blood-dark); color: #fff; padding: 15px; text-align: left; text-transform: uppercase; font-size: 0.8em; }
+        td { border: 1px solid var(--stone-grey); padding: 15px; vertical-align: top; }
+
+        .vulneravel-box { 
+            color: #ff4d4d; 
+            font-weight: bold; 
+            text-transform: uppercase; 
+            border: 1px dashed var(--blood-vivid); 
+            padding: 20px; 
+            text-align: center; 
+            margin-top: 40px;
+            background: rgba(74, 4, 4, 0.2);
+        }
+
+        footer { 
+            margin-top: 60px; 
+            text-align: center; 
+            border-top: 1px solid var(--stone-grey); 
+            padding-top: 25px; 
+            font-weight: bold; 
+            color: var(--blood-dark); 
+            font-size: 0.85em; 
+            letter-spacing: 4px; 
+        }
+
+        .blood-icon { color: var(--blood-vivid); font-size: 1.2em; }
+    </style>
+</head>
+<body>
+
+<div class="grimorio-sangue">
+    <header>
+        <h1>MAGIA DE SANGUE</h1>
+        <p style="color: #666; letter-spacing: 3px;">O Sacrifício é a única Moeda</p>
+    </header>
+
+    <div class="intro-text">
+        Diferente da Vidência Verde, que flui através da memória da terra, a Magia de Sangue é uma força violenta e imediata. Ela exige obediência da carne através da dor. Praticada pelas Maegi de Essos e pelos feiticeiros de Asshai, esta arte opera sob a premissa de que o sangue carrega a centelha vital e, ao derramá-lo, o místico libera energia para distorcer a realidade, curar o incurável ou amaldiçoar destinos.
+    </div>
+
+    <section>
+        <h2><span class="blood-icon">🩸</span> I. MECÂNICA DE CANALIZAÇÃO</h2>
+        <div class="grid-mecanica">
+            <div class="card-regra">
+                <b>Atributo e Teste</b>
+                <span class="formula">1d6 + Magia (MAG) + Astúcia</span>
+                <p style="font-size: 0.8em; color: #888; margin-top: 10px;">✓ SE TREINADO EM MISTICISMO: ROLA COM VANTAGEM (2d6).</p>
+            </div>
+            <div class="card-regra" style="border-top-color: var(--blood-vivid);">
+                <b>Pré-Requisito Narrativo</b>
+                <span>O despertar ocorre através de um ritual de perda ou linhagem específica de Essos.</span>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2><span class="blood-icon">⚔️</span> II. HABILIDADES DE SACRIFÍCIO</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Ritual</th>
+                    <th>Efeito do Sangue</th>
+                    <th>Alvo (Dificuldade)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><b>Cura de Maegi</b></td>
+                    <td>O alvo recupera <span class="formula">2d6 + MAG</span> de PV. <br><b>Custo:</b> O conjurador sofre <span class="formula">-2 PV</span> reais.</td>
+                    <td><span class="formula">9</span></td>
+                </tr>
+                <tr>
+                    <td><b>Vínculo de Dor</b></td>
+                    <td>Todo dano sofrido pelo místico é transferido a um alvo vinculado por <span class="formula">MAG</span> turnos.</td>
+                    <td><span class="formula">14</span></td>
+                </tr>
+                <tr>
+                    <td><b>Maldição Hemática</b></td>
+                    <td>Exige amostra do alvo. Reduz um atributo mundano do alvo em <span class="formula">-2</span> por uma cena.</td>
+                    <td><span class="formula">15</span></td>
+                </tr>
+                <tr>
+                    <td><b>Frenesi de Sangue</b></td>
+                    <td>O místico ou um aliado recebe <span class="formula">+3 de Dano</span> e <span class="formula">Vantagem</span> em testes de Vigor por <span class="formula">MAG</span> turnos.</td>
+                    <td><span class="formula">12</span></td>
+                </tr>
+                <tr>
+                    <td><b>Sussurros do Sangue</b></td>
+                    <td>O místico bebe o sangue de um cadáver recente para ver seus últimos <span class="formula">MAG</span> minutos de vida.</td>
+                    <td><span class="formula">11</span></td>
+                </tr>
+                <tr>
+                    <td><b>Barreira de Carne</b></td>
+                    <td>Cria uma proteção mística que concede <span class="formula">RD 5</span> contra o próximo ataque físico recebido.</td>
+                    <td><span class="formula">13</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2><span class="blood-icon">💀</span> III. O PREÇO: ECO VITAL</h2>
+        <div class="card-regra" style="border-left: 5px solid var(--blood-vivid); background: #000;">
+            <b>O Retrocesso da Carne:</b><br>
+            Falhas no teste de ritual ou o uso excessivo do poder geram um choque hemático imediato:<br><br>
+            • <b>Gatilho:</b> Falha no teste de Misticismo ou sofrer dano durante a canalização.<br>
+            • <b>Teste de Resistência:</b> <span class="formula">Vigor (Alvo 12)</span><br>
+            • <b>Falha:</b> Perda de <span class="formula">1d6 + MAG</span> de Pontos de Vida (PV).
+        </div>
+
+        <div class="vulneravel-box">
+            ⚠️ CONDIÇÃO: VULNERABILIDADE RITUAL ⚠️ <br>
+            Durante a execução de qualquer habilidade, o místico é considerado INDEFESO. <br>
+            Ataques contra ele são sucessos automáticos e causam Dano Máximo.
+        </div>
+    </section>
+
+    <footer>
+        "A MAGIA É UMA ESPADA SEM CABO. NÃO HÁ COMO SEGURÁ-LA SEM SE CORTAR." <br>
+        A SOMBRA DO DRAGÃO 2.0 • MAGIA DE SANGUE • 2026
+    </footer>
+</div>
+
+</body>
+</html>

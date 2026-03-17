@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Galeria de Lendas: A Primeira Rebelião Blackfyre</title>
+    <style>
+        body { background-color: #050505; color: #d4af37; font-family: "Georgia", serif; display: flex; flex-direction: column; align-items: center; padding: 40px; }
+        .ficha-npc { background: #0d0d0d; width: 100%; max-width: 900px; padding: 40px; border: 6px double #4a0404; box-shadow: 0 0 50px rgba(139, 0, 0, 0.3); margin-bottom: 50px; position: relative; border-radius: 4px; }
+        
+        header { text-align: center; border-bottom: 2px solid #8b0000; margin-bottom: 25px; padding-bottom: 15px; }
+        h1 { margin: 0; color: #ff0000; text-transform: uppercase; font-size: 2.2em; letter-spacing: 5px; }
+        .epiteto { color: #8b0000; font-weight: bold; text-transform: uppercase; font-size: 0.9em; letter-spacing: 2px; }
+
+        .status-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px 0; }
+        .stat { background: rgba(139, 0, 0, 0.1); border: 1px solid #4a0404; padding: 10px; text-align: center; border-radius: 4px; }
+        .stat b { display: block; color: #ff4500; font-size: 0.75em; text-transform: uppercase; }
+        .stat span { font-size: 1.5em; font-weight: bold; font-family: monospace; }
+
+        .magia-sec { border: 1px dashed #588157; padding: 15px; margin: 20px 0; background: rgba(88, 129, 87, 0.05); }
+        h2 { color: #ff4500; border-bottom: 1px solid #333; font-size: 1.2em; text-transform: uppercase; margin-top: 25px; }
+        
+        .pericias { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.9em; }
+        .pericia-item { border-bottom: 1px solid #222; padding: 3px 0; }
+        
+        .habilidade-especial { background: rgba(212, 175, 55, 0.05); border-left: 4px solid #d4af37; padding: 15px; margin-top: 15px; font-size: 0.9em; }
+        .formula { font-family: "Courier New", monospace; color: #00ff00; font-weight: bold; background: #000; padding: 2px 4px; }
+        
+        .elite-tag { position: absolute; top: 20px; right: 20px; background: #8b0000; color: #fff; padding: 5px 15px; font-size: 0.7em; text-transform: uppercase; font-weight: bold; transform: rotate(5deg); box-shadow: 2px 2px 5px #000; }
+        footer { font-size: 0.8em; color: #4a0404; text-align: center; margin-top: 20px; text-transform: uppercase; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="ficha-npc">
+        <div class="elite-tag">NPC de Elite: Soberano</div>
+        <header>
+            <span class="epiteto">O Bom Rei</span>
+            <h1>Daeron II Targaryen</h1>
+        </header>
+        <div class="status-container">
+            <div class="stat"><b>Vigor</b><span>3</span></div>
+            <div class="stat"><b>Astúcia</b><span>5</span></div>
+            <div class="stat"><b>Corte</b><span>7</span></div>
+        </div>
+        <div class="pericias">
+            <div class="pericia-item"><b>Diplomacia (Corte):</b> <span class="formula">1d6 + 12</span></div>
+            <div class="pericia-item"><b>Intriga (Corte):</b> <span class="formula">1d6 + 10</span></div>
+            <div class="pericia-item"><b>Conhecimento (Astúcia):</b> <span class="formula">1d6 + 9</span></div>
+            <div class="pericia-item"><b>Vontade (Corte):</b> <span class="formula">1d6 + 11</span></div>
+        </div>
+        <div class="habilidade-especial">
+            <b>Reforma de Dorne:</b> Daeron ignora desvantagens sociais ao lidar com personagens de Dorne e pode convocar <span class="formula">1d6 Reforços Dorneses</span> por cena de combate.
+        </div>
+        <footer>Trono de Ferro • Dragão Vermelho</footer>
+    </div>
+
+    <div class="ficha-npc">
+        <div class="elite-tag">NPC de Elite: O Dragão Negro</div>
+        <header>
+            <span class="epiteto">O Rei que Portava a Espada</span>
+            <h1>Daemon I Blackfyre</h1>
+        </header>
+        <div class="status-container">
+            <div class="stat"><b>Vigor</b><span>6</span></div>
+            <div class="stat"><b>Astúcia</b><span>6</span></div>
+            <div class="stat"><b>Corte</b><span>6</span></div>
+        </div>
+        <div class="pericias">
+            <div class="pericia-item"><b>Lâminas (Vigor):</b> <span class="formula">1d6 + 14</span></div>
+            <div class="pericia-item"><b>Atletismo (Vigor):</b> <span class="formula">1d6 + 10</span></div>
+            <div class="pericia-item"><b>Liderança (Corte):</b> <span class="formula">1d6 + 12</span></div>
+            <div class="pericia-item"><b>Esquiva (Astúcia):</b> <span class="formula">1d6 + 10</span></div>
+        </div>
+        <div class="habilidade-especial">
+            <b>Blackfyre (Aço Valiriano):</b> Causa <span class="formula">+4 Dano</span> fixo e ignora qualquer Redução de Dano (RD) de armaduras mundanas. Daemon realiza 2 Reações de Bloqueio por turno.
+        </div>
+        <footer>Pretendente • Guerreiro Perfeito</footer>
+    </div>
+
+    <div class="ficha-npc">
+        <div class="elite-tag">NPC de Elite: Marechal</div>
+        <header>
+            <span class="epiteto">Açoamargo (Bittersteel)</span>
+            <h1>Aegor Rivers</h1>
+        </header>
+        <div class="status-container">
+            <div class="stat"><b>Vigor</b><span>5</span></div>
+            <div class="stat"><b>Astúcia</b><span>5</span></div>
+            <div class="stat"><b>Corte</b><span>5</span></div>
+        </div>
+        <div class="pericias">
+            <div class="pericia-item"><b>Guerra (Astúcia):</b> <span class="formula">1d6 + 11</span></div>
+            <div class="pericia-item"><b>Intimidação (Corte):</b> <span class="formula">1d6 + 9</span></div>
+            <div class="pericia-item"><b>Lanças (Vigor):</b> <span class="formula">1d6 + 10</span></div>
+            <div class="pericia-item"><b>Vontade (Corte):</b> <span class="formula">1d6 + 10</span></div>
+        </div>
+        <div class="habilidade-especial">
+            <b>Ódio Inabalável:</b> Aegor é imune a efeitos de medo causados por Bloodraven. Seus aliados recebem <span class="formula">+2</span> em testes de Moral enquanto ele estiver visível no campo.
+        </div>
+        <footer>Companhia Dourada • Bene de Sangue</footer>
+    </div>
+
+    <div class="ficha-npc">
+        <div class="elite-tag">NPC de Elite: Mística</div>
+        <header>
+            <span class="epiteto">Estrela do Mar</span>
+            <h1>Shiera Seastar</h1>
+        </header>
+        <div class="status-container">
+            <div class="stat"><b>Vigor</b><span>3</span></div>
+            <div class="stat"><b>Astúcia</b><span>6</span></div>
+            <div class="stat"><b>Corte</b><span>6</span></div>
+        </div>
+        <div class="magia-sec">
+            <b>Afinidade Mística (AFM): 5</b> | <b>CE: 8</b><br>
+            <i>Senda: Maegi / Sombras</i>
+        </div>
+        <div class="pericias">
+            <div class="pericia-item"><b>Misticismo (Astúcia):</b> <span class="formula">1d6 + 13</span></div>
+            <div class="pericia-item"><b>Sedução (Corte):</b> <span class="formula">1d6 + 14</span></div>
+            <div class="pericia-item"><b>Alquimia (Astúcia):</b> <span class="formula">1d6 + 10</span></div>
+        </div>
+        <div class="habilidade-especial">
+            <b>Beleza Hipnótica:</b> Inimigos que tentem atacar Shiera devem vencer um teste resistido de <span class="formula">Vontade vs Corte (Shiera)</span> ou perderão sua ação de ataque naquele turno.
+        </div>
+        <footer>As Mil Pupilas • Sombra do Trono</footer>
+    </div>
+
+    <div class="ficha-npc">
+        <div class="elite-tag">NPC de Elite: Nortenho</div>
+        <header>
+            <span class="epiteto">Lorde de Winterfell</span>
+            <h1>Rodwell Stark</h1>
+        </header>
+        <div class="status-container">
+            <div class="stat"><b>Vigor</b><span>6</span></div>
+            <div class="stat"><b>Astúcia</b><span>4</span></div>
+            <div class="stat"><b>Corte</b><span>5</span></div>
+        </div>
+        <div class="pericias">
+            <div class="pericia-item"><b>Grandes Lâminas (Vigor):</b> <span class="formula">1d6 + 12</span></div>
+            <div class="pericia-item"><b>Sobrevivência (Astúcia):</b> <span class="formula">1d6 + 9</span></div>
+            <div class="pericia-item"><b>Instinto (Astúcia):</b> <span class="formula">1d6 + 8</span></div>
+        </div>
+        <div class="habilidade-especial">
+            <b>Gelo no Sangue:</b> Rodwell possui <span class="formula">RD 3</span> contra qualquer dano físico e ignora a primeira penalidade de ferimento sofrida em combate.
+        </div>
+        <footer>O Lobo de Ferro • Defensor do Norte</footer>
+    </div>
+
+</body>
+</html>

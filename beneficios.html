@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Codex de Benefícios: Herança e Linhagem V2.2</title>
+    <style>
+        :root {
+            --gold: #d4af37;
+            --silver: #e0e0e0;
+            --blood: #8b0000;
+            --obsidian: #0d0d0d;
+            --scroll: #1a1a1a;
+            --border: #333;
+            --blackfyre: #ff0000;
+        }
+
+        body { 
+            background-color: var(--obsidian); 
+            color: var(--silver); 
+            font-family: "Constantia", "Georgia", serif; 
+            display: flex; 
+            justify-content: center; 
+            padding: 40px 20px; 
+            line-height: 1.5;
+            background-image: url('https://www.transparenttextures.com/patterns/dark-leather.png');
+        }
+
+        .codex-container { 
+            background: var(--scroll); 
+            width: 100%; 
+            max-width: 1100px; 
+            padding: 60px; 
+            border: 1px solid var(--gold); 
+            box-shadow: 0 0 100px rgba(0, 0, 0, 1), 0 0 20px rgba(212, 175, 55, 0.1); 
+            border-radius: 2px;
+            position: relative;
+        }
+
+        header { 
+            text-align: center; 
+            border-bottom: 2px double var(--gold); 
+            margin-bottom: 50px; 
+            padding-bottom: 30px; 
+        }
+
+        h1 { 
+            margin: 0; 
+            color: var(--gold); 
+            text-transform: uppercase; 
+            font-size: 2.8em; 
+            letter-spacing: 10px; 
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        .subtitle { 
+            color: #888; 
+            text-transform: uppercase; 
+            font-size: 0.9em; 
+            letter-spacing: 4px; 
+        }
+
+        h2 { 
+            color: var(--gold); 
+            text-transform: uppercase; 
+            font-size: 1.4em; 
+            margin: 40px 0 20px 0; 
+            border-left: 4px solid var(--blood); 
+            padding-left: 15px; 
+            letter-spacing: 2px;
+        }
+
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-bottom: 40px; 
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--border);
+        }
+
+        th { 
+            background: #222; 
+            color: var(--gold); 
+            text-transform: uppercase; 
+            font-size: 0.85em; 
+            padding: 15px; 
+            text-align: left; 
+            border-bottom: 2px solid var(--gold);
+            letter-spacing: 1px;
+        }
+
+        td { 
+            padding: 15px; 
+            border-bottom: 1px solid var(--border); 
+            font-size: 0.9em; 
+            vertical-align: top; 
+        }
+
+        tr:hover { background: rgba(212, 175, 55, 0.03); }
+
+        .name-cell { font-weight: bold; color: var(--gold); min-width: 180px; }
+        .req-cell { font-family: "Courier New", monospace; color: #ff4d4d; font-size: 0.8em; min-width: 150px; }
+        .effect-cell { color: #ccc; font-style: italic; }
+
+        .formula { color: #00ff00; font-family: monospace; font-weight: bold; }
+        
+        .special-blackfyre { color: var(--blackfyre) !important; text-shadow: 0 0 5px rgba(255,0,0,0.3); }
+
+        footer { 
+            text-align: center; 
+            margin-top: 60px; 
+            padding-top: 20px; 
+            border-top: 1px solid var(--border); 
+            font-size: 0.8em; 
+            color: #555; 
+            letter-spacing: 3px; 
+        }
+    </style>
+</head>
+<body>
+
+<div class="codex-container">
+    <header>
+        <span class="subtitle">📜 Arquivos de Linhagem • Sistema 2.0</span>
+        <h1>TABELA DE BENEFÍCIOS</h1>
+        <p style="color: var(--silver); margin-top: 10px;">Vantagens de Sangue, Herança e Nome de Família</p>
+    </header>
+
+    <h2>🧬 Benefícios de Herança</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Benefício</th>
+                <th>Pré-Requisito</th>
+                <th>Efeitos ao Jogador</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="name-cell">Sangue dos Andals</td>
+                <td class="req-cell">—</td>
+                <td class="effect-cell">Recebe <span class="formula">Vantagem</span> em testes de <b>Corte (Diplomacia)</b> e inicia com +1 em Religião.</td>
+            </tr>
+            <tr>
+                <td class="name-cell">Sangue de Ferro</td>
+                <td class="req-cell">Ilhas de Ferro</td>
+                <td class="effect-cell">Pode prender o fôlego pelo dobro do tempo e recebe <span class="formula">Vantagem</span> em <b>Vigor (Atletismo)</b> na água.</td>
+            </tr>
+            <tr>
+                <td class="name-cell">Sangue dos Primeiros Homens</td>
+                <td class="req-cell">—</td>
+                <td class="effect-cell">Recebe <span class="formula">RD +2</span> contra frio e é o pré-requisito para <b>Vidência Verde</b>.</td>
+            </tr>
+            <tr>
+                <td class="name-cell">Sangue dos Roinar</td>
+                <td class="req-cell">Dorne</td>
+                <td class="effect-cell">Recebe <span class="formula">Vantagem</span> em <b>Astúcia (Instinto)</b> contra venenos ou emboscadas.</td>
+            </tr>
+            <tr>
+                <td class="name-cell">Sangue de Valiria</td>
+                <td class="req-cell">Narrativo</td>
+                <td class="effect-cell">Recebe <span class="formula">RD +5</span> contra fogo e concede <span class="formula">+1</span> no atributo <b>Magia</b>.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>🛡️ Benefícios das Casas</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Casa Nobre</th>
+                <th>Pré-Requisito</th>
+                <th>Efeitos ao Jogador</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="name-cell">Casa Targaryen</td>
+                <td class="req-cell">Sangue de Valiria</td>
+                <td class="effect-cell">Recebe <span class="formula">Vantagem</span> em <b>Corte (Intimidação)</b> e em testes de doma de montarias aladas.</td>
+            </tr>
+            <tr>
+                <td class="name-cell special-blackfyre">Casa Blackfyre</td>
+                <td class="req-cell">Sangue de Valiria</td>
+                <td class="effect-cell"><b>O Rei que Portava a Espada:</b> Recebe <span class="formula">Vantagem</span> em <b>Corte (Liderança)</b>. Ganha <span class="formula">+5 PV</span> e, se portar Aço Valiriano, recebe <span class="formula">+2</span> na Defesa Passiva.</td>
+            </tr>
+            <tr>
+                <td class="name-cell">Casa Lannister</td>
+                <td class="req-cell">Terras do Oeste</td>
+                <td class="effect-cell">Inicia com o dobro do <b>Dinheiro Pessoal</b> e recebe <span class="formula">Vantagem</span> em testes de suborno.</td>
+            </tr>
+            <tr>
+                <td class="name-cell">Casa Stark</td>
+                <td class="req-cell">Norte</td>
+                <td class="effect-cell">Recebe <span class="formula">Vantagem</span> em <b>Guerra</b> no inverno e possui um vínculo natural com lobos.</td>
+            </tr>
+            <tr>
+                <td class="name-cell">Casa Martell</td>
+                <td class="req-cell">Dorne</td>
+                <td class="effect-cell">Imune a penalidades de terreno em desertos e recebe <span class="formula">+2</span> em <b>Lâminas (Lanças)</b>.</td>
+            </tr>
+            <tr>
+                <td class="name-cell">Casa Baratheon</td>
+                <td class="req-cell">Stormlands</td>
+                <td class="effect-cell"><b>Nossa é a Fúria:</b> Ao sofrer dano, o próximo ataque físico do personagem causa <span class="formula">+3 de Dano</span>.</td>
+            </tr>
+            <tr>
+                <td class="name-cell">Casa Tully</td>
+                <td class="req-cell">Riverlands</td>
+                <td class="effect-cell">Ganha <span class="formula">+3</span> em <b>Vontade</b> ao proteger familiares ou aliados próximos.</td>
+            </tr>
+            <tr>
+                <td class="name-cell">Casa Tyrell</td>
+                <td class="req-cell">Campina</td>
+                <td class="effect-cell">Recebe <span class="formula">Vantagem</span> em <b>Corte (Sedução)</b> e fácil acesso a ervas medicinais.</td>
+            </tr>
+            <tr>
+                <td class="name-cell">Casa Greyjoy</td>
+                <td class="req-cell">Ilhas de Ferro</td>
+                <td class="effect-cell">Recebe <span class="formula">Vantagem</span> em <b>Saque e Pilhagem</b>; ignora penalidades de peso na água.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <footer>
+        "A HISTÓRIA É ESCRITA COM O SANGUE DOS QUE VIERAM ANTES." <br>
+        2026 • REGRA DE BENEFÍCIOS • ASOIAF 2.0
+    </footer>
+</div>
+
+</body>
+</html>

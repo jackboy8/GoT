@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Selo Arcano: Sistema de Magia V2.0</title>
+    <style>
+        :root {
+            --ancient-gold: #d4af37;
+            --blood-red: #8b0000;
+            --mystic-green: #588157;
+            --shadow-black: #0a0a0a;
+            --parchment: #f4f1ea;
+            --fire-orange: #ff4500;
+            --ice-blue: #a5f2f3;
+        }
+
+        body { 
+            background-color: var(--shadow-black); 
+            color: var(--ancient-gold); 
+            font-family: "Constantia", "Georgia", serif; 
+            display: flex; 
+            justify-content: center; 
+            padding: 50px 20px; 
+            line-height: 1.6;
+            background-image: url('https://www.transparenttextures.com/patterns/dark-leather.png');
+        }
+
+        .grimorio { 
+            background: #111; 
+            width: 100%; 
+            max-width: 1000px; 
+            padding: 60px; 
+            border: 2px solid var(--ancient-gold); 
+            box-shadow: 0 0 150px rgba(139, 0, 0, 0.2); 
+            position: relative;
+            border-radius: 4px;
+        }
+
+        header { 
+            text-align: center; 
+            border-bottom: 3px double var(--blood-red); 
+            margin-bottom: 45px; 
+            padding-bottom: 30px; 
+        }
+
+        h1 { 
+            margin: 0; 
+            color: var(--ancient-gold); 
+            text-transform: uppercase; 
+            font-size: 2.8em; 
+            letter-spacing: 10px; 
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        .version-tag { 
+            color: var(--blood-red); 
+            font-weight: bold; 
+            letter-spacing: 4px; 
+            font-size: 0.9em; 
+        }
+
+        /* Estrutura de Atributos */
+        .grid-core { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 30px; 
+            margin-bottom: 50px; 
+        }
+
+        .core-box { 
+            background: rgba(0,0,0,0.5); 
+            border: 1px solid var(--blood-red); 
+            padding: 25px; 
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .core-box h2 { 
+            margin-top: 0; 
+            font-size: 1.2em; 
+            color: var(--ancient-gold); 
+            text-transform: uppercase; 
+            border-bottom: 1px solid var(--blood-red);
+            padding-bottom: 10px;
+        }
+
+        .formula { 
+            font-family: "Courier New", monospace; 
+            color: #00ff00; 
+            font-weight: bold; 
+            background: #000; 
+            padding: 5px 10px; 
+            display: inline-block; 
+            margin: 10px 0;
+            border: 1px solid #333;
+        }
+
+        /* Sendas de Magia */
+        .senda-section { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 20px; 
+        }
+
+        .senda-card { 
+            background: #181818; 
+            border: 1px solid #333; 
+            padding: 20px; 
+            border-left: 4px solid var(--blood-red);
+            transition: 0.3s;
+        }
+
+        .senda-card:hover { transform: translateY(-5px); border-color: var(--ancient-gold); }
+        .senda-card h3 { margin-top: 0; text-transform: uppercase; font-size: 1em; display: flex; align-items: center; gap: 10px; }
+        .senda-card p { font-size: 0.9em; color: #ccc; text-align: justify; }
+
+        .tag-unlock { 
+            font-size: 0.75em; 
+            color: var(--blood-red); 
+            font-weight: bold; 
+            text-transform: uppercase; 
+            display: block; 
+            margin-bottom: 8px;
+        }
+
+        /* Cores Temáticas das Sendas */
+        .green { border-left-color: var(--mystic-green); }
+        .fire { border-left-color: var(--fire-orange); }
+        .shadow { border-left-color: #4b0082; }
+        .ice { border-left-color: var(--ice-blue); }
+
+        /* Regras de Equilíbrio */
+        .balance-rules { 
+            background: rgba(139, 0, 0, 0.05); 
+            border: 1px solid var(--blood-red); 
+            padding: 30px; 
+            margin-top: 50px; 
+        }
+
+        .balance-rules h2 { text-align: center; color: var(--blood-red); text-transform: uppercase; margin-top: 0; }
+
+        footer { 
+            text-align: center; 
+            margin-top: 60px; 
+            padding-top: 20px; 
+            border-top: 1px solid #333; 
+            font-size: 0.8em; 
+            letter-spacing: 5px; 
+            opacity: 0.6;
+        }
+
+        .emoji-icon { font-size: 1.4em; vertical-align: middle; }
+    </style>
+</head>
+<body>
+
+<div class="grimorio">
+    <header>
+        <span class="version-tag">SISTEMA 2.0 • PROTOCOLO ARCANO</span>
+        <h1>O TECIDO DA MAGIA</h1>
+        <p style="font-style: italic; color: #888;">"O poder não é um dom, é uma transfiguração do sangue."</p>
+    </header>
+
+    <div class="grid-core">
+        <div class="core-box">
+            <h2><span class="emoji-icon">🔮</span> Atributo: Magia (MAG)</h2>
+            <p>Representa a sensibilidade ao sobrenatural. Inicia em <b>0</b> para todos os seres mundanos.</p>
+            <ul>
+                <li><b>MAG 0:</b> Misticamente cego.</li>
+                <li><b>Evolução:</b> Apenas via recursos narrativos ou linhagem.</li>
+            </ul>
+        </div>
+        <div class="core-box">
+            <h2><span class="emoji-icon">📜</span> Perícia: Misticismo</h2>
+            <p>O controle e técnica. Define o sucesso da canalização sob pressão.</p>
+            <div class="formula">1d6 + Astúcia + Magia</div>
+            <p style="font-size: 0.85em; color: #888;">*Treinamento concede <b>Vantagem</b> (2d6 mantendo o melhor).</p>
+        </div>
+    </div>
+
+    <h2 style="text-align: center; color: var(--ancient-gold); letter-spacing: 5px; text-transform: uppercase;">As Sendas de Poder</h2>
+
+    <div class="senda-section">
+        <div class="senda-card green">
+            <span class="tag-unlock">🔓 Sangue dos Primeiros Homens</span>
+            <h3><span class="emoji-icon">🌿</span> Senda Verde</h3>
+            <p>Magia dos Antigos Deuses. Permite a <b>Transmigração</b> (habituação de peles) e a <b>Vidência</b> através das árvores-coração para vigiar o passado e o presente.</p>
+        </div>
+
+        <div class="senda-card">
+            <span class="tag-unlock">🔓 Sacrifício de Sangue</span>
+            <h3><span class="emoji-icon">🩸</span> Magia de Sangue</h3>
+            <p>A forma mais direta de poder. "Apenas a morte paga pela vida". Utilizada para rituais de cura milagrosa, maldições potentes e alquimia proibida.</p>
+        </div>
+
+        <div class="senda-card fire">
+            <span class="tag-unlock">🔓 Fé em R'hllor</span>
+            <h3><span class="emoji-icon">🔥</span> Magia do Fogo</h3>
+            <p>Domínio dos Sacerdotes Vermelhos. Envolve <b>Piromancia</b>, adivinhação através das chamas e o perigoso "Beijo da Vida" para erguer os mortos.</p>
+        </div>
+
+        <div class="senda-card shadow">
+            <span class="tag-unlock">🔓 Barganha de Asshai</span>
+            <h3><span class="emoji-icon">👥</span> Magia das Sombras</h3>
+            <p>A arte de manipular a luz para dar vida à escuridão. Permite a criação de <b>Sombras Assassinas</b> e o uso de <i>Glamours</i> para alterar aparências.</p>
+        </div>
+
+        <div class="senda-card ice">
+            <span class="tag-unlock">🔒 Narrativa (Épico)</span>
+            <h3><span class="emoji-icon">❄️</span> Necromancia do Gelo</h3>
+            <p>Força vinda das Terras do Eterno Inverno. Focada no <b>Levantar dos Corpos</b> (Wights) e na manipulação de frio absoluto para estilhaçar o aço.</p>
+        </div>
+    </div>
+
+    <div class="balance-rules">
+        <h2>⚠️ Leis do Equilíbrio Arcano</h2>
+        <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 15px;"><b>• Vulnerabilidade Ritual:</b> Durante a canalização, o conjurador é considerado <b>Indefeso</b> (Dano Máximo automático contra ele).</li>
+            <li style="margin-bottom: 15px;"><b>• O Eco do Poder:</b> Falhas geram retrocesso físico. Teste: <span class="formula">Vigor vs (10 + MAG)</span>. Falha resulta em perda de PV.</li>
+            <li><b>• Custo da Criação:</b> NPCs místicos devem sacrificar pontos de atributos físicos (Vigor/Astúcia) para elevar o atributo Magia.</li>
+        </ul>
+    </div>
+
+    <footer>
+        "EU OLHO PARA AS CHAMAS E VEJO O QUE O SENHOR DA LUZ ME MOSTRA. ÀS VEZES SÃO VERDADEIRAS, ÀS VEZES SÃO TESTES." <br>
+        2026 • REGRA DE OURO • ASOIAF 2.0
+    </footer>
+</div>
+
+</body>
+</html>

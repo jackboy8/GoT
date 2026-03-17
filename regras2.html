@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Guerra Integral V10.0</title>
+    <style>
+        /* ESTÉTICA DE PERGAMINHO E GUERRA */
+        body {
+            background-color: #121212;
+            color: #2c241e;
+            font-family: "Times New Roman", Times, serif;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .pergaminho {
+            background-color: #fdf5e6;
+            width: 100%;
+            max-width: 1000px;
+            padding: 60px;
+            border: 12px double #4a0404;
+            box-shadow: 0 0 60px rgba(0,0,0,1);
+            position: relative;
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 5px double #4a0404;
+            margin-bottom: 40px;
+            padding-bottom: 25px;
+        }
+
+        h1 { margin: 0; color: #8b0000; text-transform: uppercase; font-size: 3em; letter-spacing: 5px; text-shadow: 2px 2px 2px rgba(0,0,0,0.1); }
+        .version { font-weight: bold; color: #4a0404; text-transform: uppercase; font-size: 1.2em; letter-spacing: 2px; }
+
+        h2 { border-bottom: 3px solid #b08d57; color: #8b0000; text-transform: uppercase; margin-top: 50px; padding-bottom: 10px; font-size: 1.8em; }
+        h3 { color: #fff; background: #4a0404; padding: 10px 20px; margin-top: 35px; text-transform: uppercase; font-size: 1.2em; border-radius: 2px; }
+
+        .desc-fase {
+            background: rgba(184, 134, 11, 0.1);
+            border-left: 6px solid #b08d57;
+            padding: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            text-align: justify;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.95em;
+            background: rgba(255,255,255,0.5);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        th { background: #4a0404; color: #f4e4bc; padding: 15px; text-align: left; border: 1px solid #333; }
+        td { border: 1px solid #b08d57; padding: 12px; vertical-align: top; }
+
+        .res-sucesso { color: #1e5a1e; font-weight: bold; background: rgba(30, 90, 30, 0.05); }
+        .res-falha { color: #8b0000; font-weight: bold; background: rgba(139, 0, 0, 0.05); }
+
+        .grid-acoes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card-acao {
+            background: #fff;
+            border: 2px solid #8b0000;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 4px 4px 0px #b08d57;
+            transition: 0.3s;
+        }
+
+        .card-acao b { 
+            color: #8b0000; 
+            display: block; 
+            margin-bottom: 8px; 
+            text-transform: uppercase; 
+            font-size: 1.1em;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .destaque-regra {
+            border: 2px dashed #4a0404;
+            padding: 15px;
+            margin: 20px 0;
+            background: #fff;
+        }
+
+        footer {
+            margin-top: 70px;
+            text-align: center;
+            border-top: 4px double #4a0404;
+            padding-top: 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #4a0404;
+        }
+
+        .ascii-art {
+            text-align: center;
+            font-family: monospace;
+            white-space: pre;
+            font-size: 10px;
+            color: #8b0000;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 800px) {
+            .grid-acoes { grid-template-columns: 1fr; }
+            .pergaminho { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="pergaminho">
+    <div class="ascii-art">
+             .      .
+            / \    / \
+           /   \  /   \
+          /     \/     \
+         /      /\      \
+        (  (   /  \   )  )
+         \  \ (    ) /  /
+          \  \ \  / /  /
+           \  \ \/ /  /
+            \  \/  /
+             \    /
+              \  /
+               \/
+    </div>
+
+    <header>
+        <h1>MANUAL DE GUERRA INTEGRAL</h1>
+        <div class="version">A Sombra do Dragão • Sistema de Conquista V10.0</div>
+    </header>
+
+    <section>
+        <h2>FASE I: O PULSO DA GUERRA (O CAMPO VIVO)</h2>
+        <div class="desc-fase">
+            Esta fase ocorre antes de qualquer movimento tático. Ela representa a imprevisibilidade do campo de batalha: o clima que muda, o solo que cede ou a sorte que abandona os covardes. 
+            O líder deve rolar <b>1d10</b> e realizar um <b>Teste de Reação (Alvo 10)</b>. O sucesso significa dominar o ambiente; a falha significa ser consumido por ele.
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>1d10</th>
+                    <th>Evento</th>
+                    <th>Teste</th>
+                    <th class="res-sucesso">SUCESSO (Benefício)</th>
+                    <th class="res-falha">FALHA (Malefício)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>Chuva de Flechas</td><td>Ast+Guerra</td><td><b>Escudos Erguidos:</b> Defesa +3 para todas as unidades aliadas.</td><td><b>Massacre:</b> Uma unidade aliada perde 5 PV imediatamente.</td></tr>
+                <tr><td>2</td><td>Lamaçal de Sangue</td><td>Vig+Atletismo</td><td><b>Solo Firme:</b> +2 de Dano em todas as rolagens de carga.</td><td><b>Atolamento:</b> Movimento Zero e Defesa -4 por perda de equilíbrio.</td></tr>
+                <tr><td>3</td><td>Incêndio / Pânico</td><td>Cor+Persuasão</td><td><b>Fervor:</b> Todas as unidades ganham Vantagem no próximo ataque.</td><td><b>Terror:</b> Moral Global do exército reduzida em 1 ponto.</td></tr>
+                <tr><td>4</td><td>Névoa de Guerra</td><td>Ast+Investig</td><td><b>Visão Aguçada:</b> Seus ataques ignoram a armadura inimiga.</td><td><b>Cegueira:</b> Inimigo ataca com Vantagem por flanquear na bruma.</td></tr>
+                <tr><td>5</td><td>Estrutura Partida</td><td>Ast+Engenharia</td><td><b>Fortificação:</b> Defesa +5 em um ponto estratégico do mapa.</td><td><b>Isolamento:</b> Unidade isolada sofre Dano Dobrado (sem apoio).</td></tr>
+                <tr><td>6</td><td>Duelo de Oficiais</td><td>Vig+Lâminas</td><td><b>Liderança:</b> Inimigo deve testar Moral (Alvo 12) ou debandar.</td><td><b>Ferimento:</b> Líder perde 3 PV e as tropas ficam Desordenadas.</td></tr>
+                <tr><td>7</td><td>Sabotagem Interna</td><td>Cor+Intriga</td><td><b>Contrainformação:</b> Descobre o plano inimigo (Alvo -2 para você).</td><td><b>Deserção:</b> Uma unidade aliada não pode agir nesta rodada.</td></tr>
+                <tr><td>8</td><td>Carga de Reforço</td><td>Cor+Tradição</td><td><b>Inspiração:</b> Restaura 1d6 PV de uma unidade desgastada.</td><td><b>Interceptação:</b> Moral Global cai em 2 pontos (Desânimo).</td></tr>
+                <tr><td>9</td><td>Terreno Elevado</td><td>Vig+Montaria</td><td><b>Vantagem de Altura:</b> Arqueiros causam +3 de Dano extra.</td><td><b>Queda:</b> Líder fica Exposto (Defesa Passiva reduzida para 5).</td></tr>
+                <tr><td>10</td><td>O Dragão Acorda</td><td>Narrativa</td><td><b>Épico:</b> Sucesso Automático em todas as Ações de Comando.</td><td><b>Esgotamento:</b> Desvantagem Geral (2d6 menores) por cansaço.</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>FASE II: SUPERIORIDADE TÁTICA (CONQUISTA)</h2>
+        <div class="desc-fase">
+            A guerra não é apenas força bruta, é o choque entre duas mentes. No início da rodada, ambos os comandantes realizam um teste resistido de <b>Astúcia + Guerra</b>. A diferença entre os resultados determina quem detém a Vantagem Sistêmica.
+        </div>
+        <div class="destaque-regra">
+            <ul>
+                <li><b>DOMÍNIO (Vitória por 3+):</b> O comandante domina o campo. Recebe <b>Vantagem (2d6)</b> em todas as suas ordens e pode travar o movimento de uma unidade inimiga.</li>
+                <li><b>COLAPSO (Derrota por 3+):</b> O comandante perde o controle. Recebe <b>Desvantagem (2d6 menores)</b> em tudo e sua Defesa Passiva cai em -2.</li>
+                <li><b>EQUILÍBRIO (Diferença de 0-2):</b> A batalha segue o curso natural. Rolagens padrão de 1d6.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>FASE III: AÇÕES DE COMANDO EXPANDIDAS</h2>
+        <div class="desc-fase">
+            O jogador utiliza seu turno para influenciar as levas. Cada ação exige um teste (Alvo 10). Se o jogador possuir Superioridade Tática, ele rola com Vantagem.
+        </div>
+
+        <h3>⚔️ DOUTRINA DE VIGOR (COMANDO DE FRENTE)</h3>
+        <div class="grid-acoes">
+            <div class="card-acao"><b>Liderar a Carga</b>Dano Dobrado no ataque. O jogador perde 2 PV pessoais pela exposição física.<i>(Perícia: Lâminas)</i></div>
+            <div class="card-acao"><b>Segurar a Linha</b>A unidade ignora a primeira fonte de dano recebida nesta rodada.<i>(Perícia: Resistência)</i></div>
+            <div class="card-acao"><b>Grito de Guerra</b>Força teste de Moral inimigo (Alvo 12). Se falhar, unidade inimiga perde o turno.<i>(Perícia: Briga)</i></div>
+            <div class="card-acao"><b>Romper Formação</b>Ataque violento que remove o bônus de escudo do inimigo permanentemente.<i>(Perícia: Haste)</i></div>
+        </div>
+
+        <h3>🏹 DOUTRINA DE ASTÚCIA (MESTRIA TÁTICA)</h3>
+        <div class="grid-acoes">
+            <div class="card-acao"><b>Manobra de Flanco</b>Ataca pelo ponto cego. Ignora Armadura e bônus de Escudo do inimigo.<i>(Perícia: Guerra)</i></div>
+            <div class="card-acao"><b>Barragem de Flechas</b>+4 de Dano à distância. A unidade de arqueiros fica vulnerável (Defesa fixada em 8).<i>(Perícia: Arquearia)</i></div>
+            <div class="card-acao"><b>Emboscada</b>A unidade ataca primeiro (mesmo se não for seu turno) e o inimigo fica Desordenado.<i>(Perícia: Subtileza)</i></div>
+            <div class="card-acao"><b>Sabotagem de Terreno</b>Usa o ambiente contra o inimigo. Remove bônus de carga ou terreno do oponente.<i>(Perícia: Engenharia)</i></div>
+        </div>
+
+        <h3>📜 DOUTRINA DE CORTE (DIPLOMACIA E INTRIGA)</h3>
+        <div class="grid-acoes">
+            <div class="card-acao"><b>Inspirar o Moral</b>Restaura 1d6 PV de uma unidade ou remove estados de medo e confusão.<i>(Perícia: Persuasão)</i></div>
+            <div class="card-acao"><b>Semeadores de Dúvida</b>O comandante inimigo sofre Desvantagem no próximo turno por boatos de traição.<i>(Perícia: Intriga)</i></div>
+            <div class="card-acao"><b>Negociar Trégua</b>O combate para por 1 rodada. Ambos os lados recuperam 2 PV de Moral Global.<i>(Perícia: Tradição)</i></div>
+            <div class="card-acao"><b>Comprar Lealdade</b>Teste contra unidade mercenária. Ela troca de lado ou foge se receber ouro.<i>(Perícia: Comércio)</i></div>
+        </div>
+    </section>
+
+    <section>
+        <h2>IV. CATÁLOGO DE LEVAS E MORAL</h2>
+        <div class="desc-fase">
+            As unidades possuem atributos fixos que são modificados pelas Ações de Comando e pelo Pulso da Guerra.
+        </div>
+        <table>
+            <thead>
+                <tr style="background: #2c2c2c;">
+                    <th>Unidade</th>
+                    <th>PV</th>
+                    <th>Dano</th>
+                    <th>Defesa</th>
+                    <th>Traço Especial</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><b>Infantaria</b></td><td>20</td><td>5</td><td>11</td><td><b>Muralha:</b> Reduz -3 de dano vindo de ataques frontais.</td></tr>
+                <tr><td><b>Cavalaria</b></td><td>15</td><td>7</td><td>10</td><td><b>Impacto:</b> +5 de Dano no primeiro choque da batalha.</td></tr>
+                <tr><td><b>Arqueiros</b></td><td>12</td><td>4</td><td>9</td><td><b>Longo Alcance:</b> Ataca sem sofrer contra-ataque imediato.</td></tr>
+                <tr><td><b>Veteranos</b></td><td>25</td><td>6</td><td>12</td><td><b>Inabaláveis:</b> Só testam moral se chegarem a 0 PV.</td></tr>
+                <tr><td><b>Milícia</b></td><td>10</td><td>3</td><td>8</td><td><b>Frágeis:</b> Sempre rolam testes de Moral com Desvantagem.</td></tr>
+            </tbody>
+        </table>
+        <div class="destaque-regra">
+            <strong>REGRA DE MORAL:</strong> Sempre que uma unidade chegar a 5 PV (ou menos), o mestre deve rolar <b>1d6</b>. Se o resultado for <b>1 ou 2</b>, a unidade debanda e foge do campo, sendo removida do combate.
+        </div>
+    </section>
+
+    <footer>
+        "O homem que dita a sentença deve puxar a espada." <br>
+        A SOMBRA DO DRAGÃO V10.0 • 2026
+    </footer>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Sombra do Dragão — Codex</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-dark: #7a5c1e;
+    --blood: #8b1a1a;
+    --blood-dark: #4a0e0e;
+    --bg: #0a0806;
+    --bg2: #110d09;
+    --bg3: #1a1208;
+    --text: #d4c5a0;
+    --text-dim: #8a7a5a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Crimson Text', serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: 
+      radial-gradient(ellipse at 20% 50%, rgba(139,26,26,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(201,168,76,0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 24px 80px;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 64px;
+    animation: fadeUp 0.8s ease forwards;
+  }
+
+  .sigil {
+    font-size: 52px;
+    margin-bottom: 20px;
+    display: block;
+    animation: flicker 5s infinite;
+  }
+
+  @keyframes flicker {
+    0%, 93%, 100% { opacity: 0.85; }
+    94% { opacity: 0.4; }
+    96% { opacity: 0.85; }
+    98% { opacity: 0.3; }
+  }
+
+  h1 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.5rem, 4vw, 2.6rem);
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    text-shadow: 0 0 40px rgba(201,168,76,0.25), 0 2px 6px rgba(0,0,0,0.9);
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .era {
+    font-family: 'Crimson Text', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--blood);
+    letter-spacing: 0.1em;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 28px auto;
+    max-width: 460px;
+  }
+
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-dark), transparent);
+  }
+
+  .divider-gem {
+    width: 7px;
+    height: 7px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    box-shadow: 0 0 10px rgba(201,168,76,0.6);
+  }
+
+  .section {
+    margin-bottom: 44px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+  }
+
+  .section:nth-child(1) { animation-delay: 0.15s; }
+  .section:nth-child(2) { animation-delay: 0.25s; }
+  .section:nth-child(3) { animation-delay: 0.35s; }
+  .section:nth-child(4) { animation-delay: 0.45s; }
+
+  .section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 14px;
+    padding-left: 14px;
+    border-left: 2px solid var(--blood);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+  }
+
+  a.card {
+    display: block;
+    text-decoration: none;
+    background: linear-gradient(135deg, var(--bg2) 0%, var(--bg3) 100%);
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 2px;
+    padding: 20px 22px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  a.card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--gold-dark), transparent);
+    transition: background 0.3s;
+  }
+
+  a.card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(201,168,76,0.35);
+    box-shadow: 0 10px 36px rgba(0,0,0,0.55), 0 0 18px rgba(201,168,76,0.07);
+  }
+
+  a.card:hover::before {
+    background: linear-gradient(180deg, var(--gold), var(--gold-dark));
+  }
+
+  .card-icon { font-size: 20px; margin-bottom: 10px; display: block; }
+
+  .card-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--gold-light);
+    margin-bottom: 5px;
+  }
+
+  .card-desc {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    line-height: 1.55;
+  }
+
+  a.card.blood::before { background: linear-gradient(180deg, var(--blood), transparent); }
+  a.card.blood:hover { border-color: rgba(139,26,26,0.4); box-shadow: 0 10px 36px rgba(0,0,0,0.55), 0 0 18px rgba(139,26,26,0.09); }
+  a.card.blood:hover::before { background: linear-gradient(180deg, var(--blood), var(--blood-dark)); }
+
+  footer {
+    text-align: center;
+    margin-top: 56px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(201,168,76,0.08);
+  }
+
+  footer p {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    color: var(--text-dim);
+    opacity: 0.4;
+    text-transform: uppercase;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <span class="sigil">🐉</span>
+    <h1>A Sombra do Dragão</h1>
+    <p class="subtitle">Codex do Mestre</p>
+    <p class="era">Westeros · 184 AC</p>
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-gem"></div>
+      <div class="divider-line"></div>
+    </div>
+  </header>
+
+  <div class="section">
+    <p class="section-label">⚖️ Regras &amp; Sistema</p>
+    <div class="grid">
+      <a class="card" href="https://jackboy8.github.io/GoT/regrasrpg.html">
+        <span class="card-icon">📜</span>
+        <div class="card-title">Regras Gerais</div>
+        <div class="card-desc">O sistema base da campanha — mecânicas, testes e estrutura do jogo.</div>
+      </a>
+      <a class="card" href="https://jackboy8.github.io/GoT/regras2.html">
+        <span class="card-icon">⚔️</span>
+        <div class="card-title">Regras de Combate</div>
+        <div class="card-desc">Iniciativa, ações, manobras e resolução de conflitos armados.</div>
+      </a>
+      <a class="card" href="https://jackboy8.github.io/GoT/regras3.html">
+        <span class="card-icon">🛡️</span>
+        <div class="card-title">Regras Avançadas</div>
+        <div class="card-desc">Sistemas complementares, casos especiais e regras opcionais.</div>
+      </a>
+      <a class="card" href="https://jackboy8.github.io/GoT/regrasmagia.html">
+        <span class="card-icon">🔥</span>
+        <div class="card-title">Sistema de Magia</div>
+        <div class="card-desc">As antigas artes — conjuração, custos e consequências do poder arcano.</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">🧬 Criação de Personagem</p>
+    <div class="grid">
+      <a class="card" href="https://jackboy8.github.io/GoT/origens.html">
+        <span class="card-icon">🏰</span>
+        <div class="card-title">Origens</div>
+        <div class="card-desc">Casas, regiões e backgrounds — de onde vem o seu personagem.</div>
+      </a>
+      <a class="card" href="https://jackboy8.github.io/GoT/beneficios.html">
+        <span class="card-icon">✦</span>
+        <div class="card-title">Benefícios</div>
+        <div class="card-desc">Talentos, vantagens e habilidades especiais disponíveis.</div>
+      </a>
+      <a class="card blood" href="https://jackboy8.github.io/GoT/sangueregras.html">
+        <span class="card-icon">🩸</span>
+        <div class="card-title">Sangue &amp; Linhagem</div>
+        <div class="card-desc">Regras de herança de sangue e suas implicações mecânicas.</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">👤 Fichas &amp; Personagens</p>
+    <div class="grid">
+      <a class="card" href="https://jackboy8.github.io/GoT/fichadofurquim.html">
+        <span class="card-icon">🗡️</span>
+        <div class="card-title">Ficha de Furquim</div>
+        <div class="card-desc">Atributos, habilidades, histórico e equipamentos completos.</div>
+      </a>
+      <a class="card blood" href="https://jackboy8.github.io/GoT/videnteverde.html">
+        <span class="card-icon">🌿</span>
+        <div class="card-title">O Vidente Verde</div>
+        <div class="card-desc">Ficha e referências para o arquétipo dos antigos do Norte.</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">👥 NPCs</p>
+    <div class="grid">
+      <a class="card" href="https://jackboy8.github.io/GoT/npcsdeelite.html">
+        <span class="card-icon">👑</span>
+        <div class="card-title">NPCs de Elite</div>
+        <div class="card-desc">Lords, cavaleiros e figuras-chave de Westeros em 184 AC.</div>
+      </a>
+      <a class="card" href="https://jackboy8.github.io/GoT/NPC/">
+        <span class="card-icon">🗂️</span>
+        <div class="card-title">Arquivo de NPCs</div>
+        <div class="card-desc">Repositório completo de personagens secundários e aliados.</div>
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <p>A Sombra do Dragão · Codex do Mestre · Westeros 184 AC</p>
+  </footer>
+
+</div>
+</body>
+</html>

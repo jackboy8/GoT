@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Sombra do Dragão - Sistema Completo V2.0</title>
+    <style>
+        /* ESTILOS 100% OFFLINE - SEGURANÇA TOTAL */
+        body {
+            background-color: #1a1a1a;
+            color: #2c241e;
+            font-family: "Times New Roman", Times, serif;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .pergaminho {
+            background-color: #f4e4bc;
+            width: 100%;
+            max-width: 900px;
+            padding: 50px;
+            border: 8px double #8b0000;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            position: relative;
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 4px double #8b0000;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+        }
+
+        h1 { margin: 0; color: #8b0000; text-transform: uppercase; font-size: 3em; letter-spacing: 3px; }
+        .subtitle { font-weight: bold; color: #5a0000; text-transform: uppercase; font-size: 1.2em; margin-top: 10px; }
+
+        h2 { border-bottom: 2px solid #b08d57; color: #8b0000; text-transform: uppercase; font-size: 1.6em; margin-top: 40px; padding-bottom: 5px; }
+        h3 { color: #5a0000; border-bottom: 1px solid #d4b483; margin-top: 25px; font-size: 1.3em; }
+
+        p { text-align: justify; margin: 15px 0; }
+
+        .attr-container {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .attr-box {
+            flex: 1;
+            background: rgba(139, 0, 0, 0.05);
+            padding: 20px;
+            border: 1px solid #b08d57;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(255,255,255,0.3);
+        }
+
+        th { background: #2c2c2c; color: #f4e4bc; padding: 12px; text-align: left; }
+        td { border: 1px solid #b08d57; padding: 12px; vertical-align: top; }
+
+        .regra-box {
+            background: #efe0b1;
+            border-left: 5px solid #8b0000;
+            padding: 20px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        .pill {
+            background: #8b0000;
+            color: white;
+            padding: 3px 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            border-radius: 3px;
+        }
+
+        .grid-pericias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .col-pericia {
+            background: rgba(0,0,0,0.04);
+            padding: 15px;
+            border: 1px solid rgba(176, 141, 87, 0.3);
+            border-radius: 5px;
+        }
+
+        .col-pericia strong { color: #8b0000; display: block; margin-bottom: 10px; border-bottom: 1px solid #b08d57; text-align: center; font-size: 1.1em; }
+        
+        .item-pericia { margin-bottom: 12px; font-size: 0.95em; }
+        .item-pericia b { color: #2c241e; display: block; font-size: 1.05em; }
+        .item-pericia i { font-size: 0.9em; color: #555; display: block; line-height: 1.3; padding-top: 3px; }
+
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            font-style: italic;
+            border-top: 1px solid #b08d57;
+            padding-top: 20px;
+            color: #555;
+        }
+
+        @media (max-width: 750px) {
+            .attr-container, .grid-pericias { grid-template-columns: 1fr; flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="pergaminho">
+    <header>
+        <h1>A Sombra do Dragão</h1>
+        <div class="subtitle">Manual de Regras Detalhado - Versão 2.0</div>
+    </header>
+
+    <section>
+        <h2>1. Atributos Fundamentais (Geração: 1d6 + 1)</h2>
+        <p>Os atributos definem sua essência em Westeros. Role <strong>1d6 + 1</strong> para cada pilar. Os valores variam de 2 (Comum) a 7 (Lendário).</p>
+        <div class="attr-container">
+            <div class="attr-box">
+                <strong>VIGOR (Vig)</strong><br>
+                <small>Poder físico e resistência. Usado para combates corporais, suportar fadiga e intimidar pela força.</small>
+            </div>
+            <div class="attr-box">
+                <strong>ASTÚCIA (Ast)</strong><br>
+                <small>Reflexos e estratégia. Usado para iniciativa, arquearia, notar emboscadas e táticas de guerra.</small>
+            </div>
+            <div class="attr-box">
+                <strong>CORTE (Cor)</strong><br>
+                <small>Lábia e política. Usado para navegar pela nobreza, mentir, persuadir e manter a etiqueta.</small>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>2. Mecânica de Jogo</h2>
+        <p>Para qualquer ação que envolva risco, role <strong>1d6 + Atributo Relacionado</strong>.</p>
+        <table>
+            <tr><th>Dificuldade</th><th>Alvo</th><th>Contexto Narrativo</th></tr>
+            <tr><td><strong>Fácil</strong></td><td>8</td><td>Tarefas sob pressão moderada para profissionais.</td></tr>
+            <tr><td><strong>Padrão</strong></td><td>10</td><td>Onde se decidem os conflitos reais e duelos mortais.</td></tr>
+            <tr><td><strong>Difícil</strong></td><td>13</td><td>Feitos lendários que exigem perícia ou sorte extrema.</td></tr>
+        </table>
+        <div class="regra-box">
+            <strong>Regra de Vantagem:</strong> Se você possuir uma Perícia relevante, role <strong>2d6</strong> e use apenas o <strong>maior resultado</strong>. Todo personagem começa com <strong>5 Perícias Iniciais</strong>.
+        </div>
+    </section>
+
+    <section>
+        <h2>3. Sucessos Críticos e Falhas</h2>
+        <p>O dado natural (sem bônus) dita a qualidade da ação:</p>
+        
+        <p><span class="pill">6 Natural - Sucesso Crítico</span><br>
+        Triunfo absoluto. No combate, ignora qualquer <strong>Armadura</strong> (encontrou a brecha). Na narrativa, você obtém um benefício extra além do sucesso.</p>
+        
+        <p><span class="pill" style="background:#333">1 Natural - Falha Crítica</span><br>
+        Erro desastroso. No combate, você fica <strong>Exposto</strong> (ataques contra você têm vantagem). Na narrativa, a situação piora imediatamente.</p>
+    </section>
+
+    <section>
+        <h2>4. Combate e Sobrevivência</h2>
+        <p>O combate em Westeros é rápido e perigoso. Poucos golpes podem encerrar uma linhagem.</p>
+        <div class="attr-container">
+            <div class="attr-box"><strong>Saúde (PV):</strong> Vigor + 6<br><small>Sua capacidade de absorver ferimentos.</small></div>
+            <div class="attr-box"><strong>Defesa:</strong> Astúcia + 7<br><small>O valor que o inimigo deve atingir para te acertar.</small></div>
+        </div>
+
+        <h3>Arsenal (Dano Causado)</h3>
+        <table>
+            <tr><th>Categoria</th><th>Dano</th><th>Exemplos</th></tr>
+            <tr><td>Armas Leves</td><td>3</td><td>Adagas, Arcos, Bestas, Facas.</td></tr>
+            <tr><td>Armas Pesadas</td><td>5</td><td>Espadas Longas, Machados, Lanças.</td></tr>
+            <tr><td style="color:#8b0000"><strong>Aço Valiriano</strong></td><td style="color:#8b0000"><strong>7</strong></td><td><strong>Ignora armaduras de Couro e Malha.</strong></td></tr>
+        </table>
+
+        <h3>Proteções (Redução de Dano)</h3>
+        <table>
+            <tr><th>Armadura</th><th>Redução</th><th>Descrição</th></tr>
+            <tr><td>Couro</td><td>-1</td><td>Batedores e plebeus.</td></tr>
+            <tr><td>Cota de Malha</td><td>-3</td><td>Soldados de linha e mercenários.</td></tr>
+            <tr><td>Placa Completa</td><td>-5</td><td>Cavaleiros e Grandes Lordes.</td></tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>5. Perícias Detalhadas (Escolha 5 Iniciais)</h2>
+        <div class="grid-pericias">
+            <div class="col-pericia">
+                <strong>VIGOR</strong>
+                <div class="item-pericia"><b>Atletismo</b><i>Capacidade física para correr, escalar e natação extrema.</i></div>
+                <div class="item-pericia"><b>Briga</b><i>Combate desarmado, socos, chutes e uso do cenário.</i></div>
+                <div class="item-pericia"><b>Lâminas</b><i>O manejo clássico de espadas, machados e adagas.</i></div>
+                <div class="item-pericia"><b>Montaria</b><i>Controle sobre cavalos e habilidade de lutar montado.</i></div>
+                <div class="item-pericia"><b>Resistência</b><i>Suportar dor, venenos, frio extremo e fadiga longa.</i></div>
+                <div class="item-pericia"><b>Armas de Haste</b><i>Especialização em lanças e piques em formação.</i></div>
+            </div>
+            <div class="col-pericia">
+                <strong>ASTÚCIA</strong>
+                <div class="item-pericia"><b>Guerra</b><i>Conhecimento estratégico, táticas de cerco e comando.</i></div>
+                <div class="item-pericia"><b>Investigação</b><i>Encontrar detalhes ocultos e ler as intenções reais.</i></div>
+                <div class="item-pericia"><b>Medicina</b><i>Tratamento de feridas de batalha, doenças e ervas.</i></div>
+                <div class="item-pericia"><b>Natureza</b><i>Sobrevivência selvagem, caça e rastreamento.</i></div>
+                <div class="item-pericia"><b>Subtileza</b><i>Agir nas sombras, furtividade e mãos leves.</i></div>
+                <div class="item-pericia"><b>Arquearia</b><i>O uso preciso de arcos e bestas à distância.</i></div>
+            </div>
+            <div class="col-pericia">
+                <strong>CORTE</strong>
+                <div class="item-pericia"><b>Intriga</b><i>Navegar por segredos, boatos e política de corte.</i></div>
+                <div class="item-pericia"><b>Mentira</b><i>Enganação verbal, blefes e criação de disfarces.</i></div>
+                <div class="item-pericia"><b>Persuasão</b><i>Diplomacia, carisma e negociação de termos.</i></div>
+                <div class="item-pericia"><b>Tradição</b><i>Conhecimento de heráldica, linhagens e história.</i></div>
+                <div class="item-pericia"><b>Atuação</b><i>Performance social através de música, canto ou poesia.</i></div>
+                <div class="item-pericia"><b>Comércio</b><i>Avaliação de bens e negociação de preços de mercado.</i></div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        "O homem que dita a sentença deve puxar a espada."<br>
+        <strong>A Sombra do Dragão V2.0</strong>
+    </footer>
+</div>
+
+</body>
+</html>

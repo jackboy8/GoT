@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Codex: Ser Brynden Rivers</title>
+    <style>
+        :root {
+            --primary: #8b0000;
+            --secondary: #ff0000;
+            --bg: #050505;
+            --panel: #111111;
+            --text: #d4af37;
+            --accent: #588157;
+            --border: #2a2a2a;
+            --gold: #ffd700;
+        }
+
+        body { 
+            background-color: var(--bg); 
+            color: var(--text); 
+            font-family: "Constantia", "Georgia", serif; 
+            display: flex; 
+            justify-content: center; 
+            padding: 50px 20px; 
+            line-height: 1.6;
+            background-image: url('https://www.transparenttextures.com/patterns/dark-matter.png');
+        }
+
+        .ficha-container { 
+            background: var(--panel); 
+            width: 100%; 
+            max-width: 950px; 
+            padding: 60px; 
+            border: 2px solid var(--primary); 
+            box-shadow: 0 0 120px rgba(139, 0, 0, 0.25), inset 0 0 40px rgba(0,0,0,0.8); 
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* Cantoneiras decorativas ASCII/Emoji */
+        .corner { position: absolute; font-size: 20px; color: var(--primary); opacity: 0.6; }
+        .top-l { top: 15px; left: 15px; }
+        .top-r { top: 15px; right: 15px; }
+        .bot-l { bottom: 15px; left: 15px; }
+        .bot-r { bottom: 15px; right: 15px; }
+
+        header { 
+            text-align: center; 
+            border-bottom: 3px double var(--primary); 
+            margin-bottom: 40px; 
+            padding-bottom: 35px; 
+        }
+
+        h1 { 
+            margin: 0; 
+            color: var(--secondary); 
+            text-transform: uppercase; 
+            font-size: 3.2em; 
+            letter-spacing: 14px; 
+            text-shadow: 3px 3px 0px #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .subtitle { 
+            color: #777; 
+            text-transform: uppercase; 
+            font-size: 0.85em; 
+            letter-spacing: 6px; 
+            display: block; 
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        /* Grid de Informações Básicas */
+        .info-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 20px; 
+            margin-bottom: 40px;
+            background: rgba(0,0,0,0.3);
+            padding: 25px;
+            border-radius: 5px;
+            border: 1px solid var(--border);
+        }
+
+        .info-item { 
+            border-bottom: 1px solid var(--border); 
+            padding: 10px 0; 
+            font-size: 1em; 
+            display: flex;
+            align-items: center;
+        }
+
+        .info-item b { color: var(--primary); text-transform: uppercase; font-size: 0.75em; margin-right: 12px; letter-spacing: 2px; min-width: 80px; }
+
+        /* Atributos Estilizados */
+        .attr-wrapper { 
+            display: flex; 
+            justify-content: space-between; 
+            margin-bottom: 45px; 
+            gap: 20px;
+        }
+
+        .attr-box { 
+            flex: 1;
+            background: linear-gradient(180deg, #1a1a1a 0%, #000 100%); 
+            border: 1px solid var(--border); 
+            text-align: center; 
+            padding: 25px 10px; 
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            border-bottom: 4px solid var(--primary);
+        }
+
+        .attr-box b { display: block; font-size: 0.75em; text-transform: uppercase; color: #888; margin-bottom: 10px; letter-spacing: 2px;}
+        .attr-box span { font-size: 2.8em; font-family: 'Courier New', monospace; font-weight: bold; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.1); }
+
+        /* Seções de Conteúdo */
+        .section-header { 
+            font-size: 1.3em; 
+            text-transform: uppercase; 
+            color: var(--gold); 
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 8px;
+            margin: 45px 0 25px 0; 
+            letter-spacing: 4px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .content-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 30px; 
+        }
+
+        .content-box { 
+            background: rgba(139, 0, 0, 0.03); 
+            border: 1px solid var(--border); 
+            padding: 25px; 
+            border-radius: 4px;
+        }
+
+        .content-box h3 { 
+            margin-top: 0; 
+            font-size: 0.85em; 
+            text-transform: uppercase; 
+            color: var(--primary); 
+            margin-bottom: 15px; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Perícias e Tags */
+        .tag-list { display: flex; flex-wrap: wrap; gap: 10px; }
+        .tag { 
+            background: #000; 
+            border: 1px solid var(--border); 
+            color: #ccc; 
+            padding: 6px 14px; 
+            font-size: 0.85em; 
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+        .tag:hover { border-color: var(--primary); color: #fff; }
+        .tag.magic { border-color: var(--accent); color: var(--accent); background: rgba(88, 129, 87, 0.05); }
+
+        .formula { color: #00ff00; font-family: monospace; font-weight: bold; font-size: 1.1em; }
+
+        /* Sobre e Rodapé */
+        .bio-text { font-style: italic; color: #bbb; font-size: 1em; line-height: 1.8; list-style: none; padding: 0; }
+        .bio-text li { margin-bottom: 15px; display: flex; gap: 15px; align-items: flex-start; }
+
+        footer { 
+            text-align: center; 
+            margin-top: 70px; 
+            padding-top: 30px; 
+            border-top: 1px solid var(--border); 
+            font-size: 0.85em; 
+            color: #555; 
+            letter-spacing: 6px; 
+            text-transform: uppercase;
+        }
+
+        .blood-drip { color: var(--secondary); font-size: 24px; vertical-align: middle; }
+    </style>
+</head>
+<body>
+
+<div class="ficha-container">
+    <div class="corner top-l">✙</div>
+    <div class="corner top-r">✙</div>
+    <div class="corner bot-l">✙</div>
+    <div class="corner bot-r">✙</div>
+
+    <header>
+        <span class="subtitle">⚔️ A Sombra do Dragão • Arquivo Real ⚔️</span>
+        <h1><span class="blood-drip">🩸</span> Ser Brynden Rivers</h1>
+        <span class="subtitle" style="color: var(--primary);">O Corvo de Sangue • Mestre dos Sussurros</span>
+    </header>
+
+    <div class="info-grid">
+        <div class="info-item"><b>🕯️ Idade</b> 21 Invernos</div>
+        <div class="info-item"><b>🗺️ Origem</b> Terras da Coroa</div>
+        <div class="info-item"><b>👑 Status</b> Bastardo Real Legitimado</div>
+        <div class="info-item"><b>❤️ Amante</b> Shiera Seastar</div>
+        <div class="info-item" style="grid-column: span 2;"><b>🎭 Função</b> Membro do Pequeno Conselho de Daeron II</div>
+        <div class="info-item" style="grid-column: span 2;"><b>🩸 Vitalidade</b> <span class="formula">&nbsp;[ 10 / 10 ]&nbsp;</span> <span style="margin-left:10px; font-size:0.8em; color: #00ff00;">● ESTÁVEL</span></div>
+    </div>
+
+    <div class="attr-wrapper">
+        <div class="attr-box"><b>💪 Vigor</b><span>4</span></div>
+        <div class="attr-box"><b>🧠 Astúcia</b><span>7</span></div>
+        <div class="attr-box"><b>🗣️ Corte</b><span>7</span></div>
+        <div class="attr-box" style="border-bottom-color: var(--accent);"><b>🔮 Magia</b><span>2</span></div>
+    </div>
+
+    <div class="content-grid">
+        <div class="content-box">
+            <h3>🗡️ Perícias Treinadas (Vantagem)</h3>
+            <div class="tag-list">
+                <span class="tag">Guerra</span>
+                <span class="tag">Investigação</span>
+                <span class="tag">Lâminas</span>
+                <span class="tag">Arquearia</span>
+                <span class="tag">Intriga</span>
+                <span class="tag">Misticismo</span>
+            </div>
+        </div>
+
+        <div class="content-box">
+            <h3>🌑 Linhagem e Bênçãos</h3>
+            <div class="tag-list">
+                <span class="tag magic">🌿 Vidente Verde</span>
+                <span class="tag magic">🪵 Sangue dos Primeiros Homens</span>
+                <span class="tag">🐉 Sangue Valiriano</span>
+                <span class="tag">📜 Bastardo Legitimado</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-header">🏹 Arsenal do Conselho</div>
+    <div class="content-grid">
+        <div class="content-box" style="border-left: 3px solid var(--secondary);">
+            <p><b>Dark Sister (Aço Valiriano)</b><br>
+            <span class="formula">💥 Dano 7</span><br>
+            <small style="color: #777;">✨ Ignora Redução de Dano mundana.</small></p>
+            
+            <p><b>Arco do Represeiro</b><br>
+            <span class="formula">🎯 Dano 3</span><br>
+            <small style="color: #777;">🦅 Aljava de Pontas Negras.</small></p>
+        </div>
+        <div class="content-box" style="border-left: 3px solid #666;">
+            <p><b>Armadura de Placa Completa</b><br>
+            <span class="formula">🛡️ RD 5</span> (Absorção de Impacto)</p>
+            <p><b>Montaria Especial:</b><br>
+            🐎 Sementegélida (Garrancho de Guerra)</p>
+        </div>
+    </div>
+
+    <div class="section-header">📜 Crônicas do Corvo</div>
+    <ul class="bio-text">
+        <li><span>👀</span> <b>Visão Plena:</b> Diferente das lendas futuras, Ser Brynden preserva seus dois olhos, um deles fixo no presente e outro nas sombras.</li>
+        <li><span>🏹</span> <b>Dentes de Corvo:</b> Comanda pessoalmente uma pequena unidade de elite, arqueiros que são seus ouvidos e mãos no campo.</li>
+        <li><span>🥀</span> <b>O Beijo da Estrela:</b> Seu coração pertence à Shiera Seastar, a única alma capaz de decifrar seus silêncios.</li>
+        <li><span>❄️</span> <b>Aura Espectral:</b> Seu albinismo não é apenas físico; é um lembrete constante de sua conexão com os Antigos Deuses do Norte.</li>
+    </ul>
+
+    <footer>
+        "Quantos olhos tem Lorde Bloodraven? Mil e um."
+    </footer>
+</div>
+
+</body>
+</html>

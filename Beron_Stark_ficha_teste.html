@@ -204,11 +204,10 @@
 </div>
 
 <script>
-    // --- CONFIGURAÇÃO DO GITHUB ---
-    const token = "*"; // Insira seu token aqui
-    const REPO_PATH = "jackboy8/GoT"; // Ex: "jean/rpg-stark"
-    const FILE_PATH = "ficha.json"; // Nome do arquivo no repositório
-    // ------------------------------
+    // --- CONFIGURAÇÃO DO REPOSITÓRIO ---
+    const REPO_PATH = "jackboy8/GoT"; 
+    const FILE_PATH = "ficha.json"; 
+    // ----------------------------------
 
     const periciasPossiveis = [
         "Atletismo", "Briga", "Lâminas", "Montaria", "Resistência", 
@@ -217,15 +216,33 @@
         "Persuasão", "Tradição", "Atuação", "Comércio", "Misticismo"
     ];
 
-    // Carregamento Inicial (Leitura)
+    // Função para buscar o Token no Cache ou pedir um novo
+    function obterToken() {
+        let tokenSalvo = localStorage.getItem("github_token_rpg");
+        
+        if (!tokenSalvo) {
+            tokenSalvo = prompt("🔑 Token não encontrado!\nInsira seu GitHub Token (ele ficará salvo apenas neste navegador):");
+            if (tokenSalvo) {
+                localStorage.setItem("github_token_rpg", tokenSalvo);
+            }
+        }
+        return tokenSalvo;
+    }
+
+    // Função para limpar o token se ele estiver errado
+    function resetarToken() {
+        localStorage.removeItem("github_token_rpg");
+        alert("Token removido do cache. Na próxima vez, será pedido um novo.");
+    }
+
     async function carregarFicha() {
         try {
-            const response = await fetch(FILE_PATH + '?nocache=' + new Date().getTime());
-            if (!response.ok) throw new Error("Arquivo não encontrado.");
-            const data = await response.json();
-            const p = data.personagem;
+            const response = await fetch(`https://api.github.com/repos/${REPO_PATH}/contents/${FILE_PATH}?t=${new Date().getTime()}`);
+            if (!response.ok) throw new Error("Erro ao ler JSON");
+            
+            const fileData = await response.json();
+            const p = JSON.parse(atob(fileData.content)).personagem;
 
-            // Preencher campos
             document.getElementById('nome').innerText = p.identidade.nome;
             document.getElementById('funcao').innerText = p.identidade.funcao;
             document.getElementById('origem').innerText = p.identidade.origem;
@@ -237,9 +254,8 @@
             document.getElementById('corte').innerText = p.atributos.corte;
             document.getElementById('magia').innerText = p.atributos.magia;
 
-            // Perícias
             const container = document.getElementById('pericias');
-            container.innerHTML = "";
+            container.innerHTML = ""; 
             periciasPossiveis.forEach(skill => {
                 const isTreinada = p.pericias_treinadas.includes(skill);
                 container.innerHTML += `
@@ -254,93 +270,87 @@
             document.getElementById('relacionamentos').innerText = p.relacionamentos.familia;
             document.getElementById('tesouros').innerText = p.tesouros;
 
-        } catch (e) { console.error("Erro ao carregar:", e); }
-    }
-
-    // Função de Salvamento (Escrita no GitHub)
-    async function salvarFicha() {
-    if (!token) return;
-
-    const btn = document.getElementById('btnSalvar');
-    btn.innerText = "⌛ Salvando...";
-    btn.disabled = true;
-
-    try {
-        // 1. CRIANDO A VARIÁVEL novoConteudo COM OS DADOS DA TELA
-        const novoConteudo = {
-            personagem: {
-                identidade: {
-                    nome: document.getElementById('nome').innerText,
-                    funcao: document.getElementById('funcao').innerText,
-                    origem: document.getElementById('origem').innerText,
-                    vida_pv: document.getElementById('vida').innerText,
-                    status: document.getElementById('status').innerText,
-                    idade: document.getElementById('idade').innerText
-                },
-                atributos: {
-                    vigor: parseInt(document.getElementById('vigor').innerText) || 0,
-                    astucia: parseInt(document.getElementById('astucia').innerText) || 0,
-                    corte: parseInt(document.getElementById('corte').innerText) || 0,
-                    magia: parseInt(document.getElementById('magia').innerText) || 0
-                },
-                pericias_treinadas: periciasPossiveis.filter(s => {
-                    const cb = document.getElementById(`skill_${s}`);
-                    return cb ? cb.checked : false;
-                }),
-                linhagem_beneficios: document.getElementById('linhagem').innerText.split('\n').filter(l => l.trim() !== ""),
-                arsenal_equipamentos: {
-                    arma: document.getElementById('arsenal').innerText.split('\n')[0]?.replace('Arma: ', '') || "",
-                    defesa: document.getElementById('arsenal').innerText.split('\n')[1]?.replace('Defesa: ', '') || ""
-                },
-                relacionamentos: { familia: document.getElementById('relacionamentos').innerText },
-                tesouros: document.getElementById('tesouros').innerText
-            }
-        };
-
-        // 2. BUSCANDO O SHA DO ARQUIVO ATUAL NO GITHUB
-        const resGet = await fetch(`https://api.github.com/repos/${REPO_PATH}/contents/${FILE_PATH}`, {
-            headers: { 
-                "Authorization": `token ${token}`,
-                "Accept": "application/vnd.github.v3+json"
-            }
-        });
-        
-        if (!resGet.ok) throw new Error("Não foi possível acessar o GitHub. Verifique o Token.");
-        const fileData = await resGet.json();
-
-        // 3. ENVIANDO O UPLOAD (AQUI USA A VARIÁVEL novoConteudo)
-        const resPut = await fetch(`https://api.github.com/repos/${REPO_PATH}/contents/${FILE_PATH}`, {
-            method: "PUT",
-            headers: {
-                "Authorization": `token ${token}`,
-                "Content-Type": "application/json",
-                "Accept": "application/vnd.github.v3+json"
-            },
-            body: JSON.stringify({
-                message: "Atualização de ficha: " + novoConteudo.personagem.identidade.nome,
-                content: btoa(unescape(encodeURIComponent(JSON.stringify(novoConteudo, null, 2)))),
-                sha: fileData.sha
-            })
-        });
-
-        if (resPut.ok) {
-            alert("✅ Sucesso! Ficha salva no repositório.");
-            location.reload(); 
-        } else {
-            const erroRes = await resPut.json();
-            throw new Error(erroRes.message || "Erro no upload final.");
+        } catch (error) {
+            console.error("Erro no carregamento:", error);
         }
-
-    } catch (err) {
-        alert("❌ Erro: " + err.message);
-        console.error(err);
-    } finally {
-        btn.innerText = "💾 Salvar Dados";
-        btn.disabled = false;
     }
-}
 
-    window.onload = carregarFicha;
+    async function salvarFicha() {
+        const token = obterToken();
+        if (!token) return;
+
+        const btn = document.getElementById('btnSalvar');
+        btn.innerText = "⌛ Gravando...";
+        btn.disabled = true;
+
+        try {
+            const novoConteudo = {
+                personagem: {
+                    identidade: {
+                        nome: document.getElementById('nome').innerText,
+                        funcao: document.getElementById('funcao').innerText,
+                        origem: document.getElementById('origem').innerText,
+                        vida_pv: document.getElementById('vida').innerText,
+                        status: document.getElementById('status').innerText,
+                        idade: document.getElementById('idade').innerText
+                    },
+                    atributos: {
+                        vigor: parseInt(document.getElementById('vigor').innerText) || 0,
+                        astucia: parseInt(document.getElementById('astucia').innerText) || 0,
+                        corte: parseInt(document.getElementById('corte').innerText) || 0,
+                        magia: parseInt(document.getElementById('magia').innerText) || 0
+                    },
+                    pericias_treinadas: periciasPossiveis.filter(s => document.getElementById(`skill_${s}`).checked),
+                    linhagem_beneficios: document.getElementById('linhagem').innerText.split('\n').filter(l => l.trim() !== ""),
+                    arsenal_equipamentos: {
+                        arma: document.getElementById('arsenal').innerText.split('\n')[0]?.replace('Arma: ', '') || "",
+                        defesa: document.getElementById('arsenal').innerText.split('\n')[1]?.replace('Defesa: ', '') || ""
+                    },
+                    relacionamentos: { familia: document.getElementById('relacionamentos').innerText },
+                    tesouros: document.getElementById('tesouros').innerText
+                }
+            };
+
+            const resGet = await fetch(`https://api.github.com/repos/${REPO_PATH}/contents/${FILE_PATH}`, {
+                headers: { "Authorization": `token ${token}` }
+            });
+
+            if (resGet.status === 401 || resGet.status === 403) {
+                resetarToken();
+                throw new Error("Token inválido ou expirado. O cache foi limpo.");
+            }
+
+            const fileData = await resGet.json();
+
+            const resPut = await fetch(`https://api.github.com/repos/${REPO_PATH}/contents/${FILE_PATH}`, {
+                method: "PUT",
+                headers: {
+                    "Authorization": `token ${token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    message: "Atualização da ficha - Beron Stark",
+                    content: btoa(unescape(encodeURIComponent(JSON.stringify(novoConteudo, null, 2)))),
+                    sha: fileData.sha
+                })
+            });
+
+            if (resPut.ok) {
+                alert("✅ Alterações salvas no GitHub com sucesso!");
+                location.reload();
+            } else {
+                throw new Error("Erro no upload.");
+            }
+
+        } catch (err) {
+            alert("❌ Erro: " + err.message);
+        } finally {
+            btn.innerText = "💾 Salvar Dados";
+            btn.disabled = false;
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', carregarFicha);
 </script>
 
 </body>

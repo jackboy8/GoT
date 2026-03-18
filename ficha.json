@@ -10,14 +10,16 @@
     },
     "atributos": {
       "vigor": 7,
-      "astucia": 30,
+      "astucia": 3,
       "corte": 5,
       "magia": 0
     },
     "pericias_treinadas": [
       "Montaria",
       "Guerra",
-      "Misticismo"
+      "Misticismo",
+      "Resistência",
+      "Lâminas"
     ],
     "linhagem_beneficios": [
       "I. Casca de Gelo: Recebe +5 PV MÃÂ¡ximos e ignora qualquer penalidade de movimento ou exaustÃÂ£o causada por frio extremo.",

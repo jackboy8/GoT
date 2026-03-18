@@ -10,28 +10,25 @@
     },
     "atributos": {
       "vigor": 7,
-      "astucia": 3,
+      "astucia": 30,
       "corte": 5,
       "magia": 0
     },
     "pericias_treinadas": [
-      "Lâminas",
       "Montaria",
-      "Resistência",
-      "Guerra",
-      "Investigação"
+      "Guerra"
     ],
     "linhagem_beneficios": [
-      "I. Casca de Gelo: Recebe +5 PV Máximos e ignora qualquer penalidade de movimento ou exaustão causada por frio extremo.",
+      "I. Casca de Gelo: Recebe +5 PV MÃ¡ximos e ignora qualquer penalidade de movimento ou exaustÃ£o causada por frio extremo.",
       "II. Sangue do Inverno: Possui Vantagem (2d6) em testes de Vigor para resistir a debandada, medo ou morte iminente."
     ],
     "arsenal_equipamentos": {
-      "arma": "Espada Longa de Aço Valiriano - 'Ice' - 7 de dano",
-      "defesa": "10 - Armadura de Placa - -5 de redução"
+      "arma": "Espada Longa de AÃ§o Valiriano - 'Ice' - 7 de dano",
+      "defesa": "10 - Armadura de Placa - -5 de reduÃ§Ã£o"
     },
     "relacionamentos": {
-      "familia": "Lord Donnor Stark (Irmão) - Lorde de Winterfell"
+      "familia": "Lord Donnor Stark (IrmÃ£o) - Lorde de Winterfell"
     },
-    "tesouros": "37 Dragões de Ouro"
+    "tesouros": "37 DragÃµes de Ouro"
   }
 }

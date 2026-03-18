@@ -10,11 +10,17 @@
     },
     "atributos": {
       "vigor": 7,
-      "astucia": 3,
+      "astucia": 30,
       "corte": 5,
       "magia": 0
     },
-    "pericias_treinadas": ["Lâminas", "Montaria", "Resistência", "Guerra", "Investigação"],
+    "pericias_treinadas": [
+      "Lâminas",
+      "Montaria",
+      "Resistência",
+      "Guerra",
+      "Investigação"
+    ],
     "linhagem_beneficios": [
       "I. Casca de Gelo: Recebe +5 PV Máximos e ignora qualquer penalidade de movimento ou exaustão causada por frio extremo.",
       "II. Sangue do Inverno: Possui Vantagem (2d6) em testes de Vigor para resistir a debandada, medo ou morte iminente."

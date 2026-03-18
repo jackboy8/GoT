@@ -17,7 +17,9 @@
     "pericias_treinadas": [
       "Lâminas",
       "Montaria",
-      "Guerra"
+      "Resistência",
+      "Guerra",
+      "Investigação"
     ],
     "linhagem_beneficios": [
       "I. Casca de Gelo: Recebe +5 PV Maximos e ignora qualquer penalidade de movimento ou exaustao causada por frio extremo.",
